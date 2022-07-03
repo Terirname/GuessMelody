@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fGame));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
@@ -36,8 +37,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblCounter1 = new System.Windows.Forms.Label();
             this.lblCounter2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnContinue = new System.Windows.Forms.Button();
+            lblNumberOfMelody = new System.Windows.Forms.Label();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnCancel
@@ -111,23 +115,47 @@
             this.lblCounter2.TabIndex = 6;
             this.lblCounter2.Text = "0";
             // 
-            // button1
+            // btnPause
             // 
-            this.button1.Location = new System.Drawing.Point(219, 443);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 39);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Pause";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPause.Location = new System.Drawing.Point(219, 443);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(93, 39);
+            this.btnPause.TabIndex = 7;
+            this.btnPause.Text = "Pause";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
-            // button2
+            // btnContinue
             // 
-            this.button2.Location = new System.Drawing.Point(219, 488);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 39);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Continue";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnContinue.Location = new System.Drawing.Point(219, 488);
+            this.btnContinue.Name = "btnContinue";
+            this.btnContinue.Size = new System.Drawing.Size(93, 39);
+            this.btnContinue.TabIndex = 8;
+            this.btnContinue.Text = "Continue";
+            this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
+            // 
+            // lblNumberOfMelody
+            // 
+            lblNumberOfMelody.AutoSize = true;
+            lblNumberOfMelody.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblNumberOfMelody.Location = new System.Drawing.Point(419, 101);
+            lblNumberOfMelody.Name = "lblNumberOfMelody";
+            lblNumberOfMelody.Size = new System.Drawing.Size(27, 32);
+            lblNumberOfMelody.TabIndex = 9;
+            lblNumberOfMelody.Text = "0";
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new System.Drawing.Point(21, 249);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(786, 44);
+            progressBar1.TabIndex = 10;
+            // 
+            // timer1
+            // 
+            timer1.Interval = 1000;
+            timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // fGame
             // 
@@ -139,8 +167,10 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(839, 577);
             this.ControlBox = false;
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(progressBar1);
+            this.Controls.Add(lblNumberOfMelody);
+            this.Controls.Add(this.btnContinue);
+            this.Controls.Add(this.btnPause);
             this.Controls.Add(this.lblCounter2);
             this.Controls.Add(this.lblCounter1);
             this.Controls.Add(this.label2);
@@ -152,6 +182,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fGame";
             this.Text = "Game";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fGame_FormClosed);
             this.Load += new System.EventHandler(this.fGame_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,7 +198,10 @@
         private Label label2;
         private Label lblCounter1;
         private Label lblCounter2;
-        private Button button1;
-        private Button button2;
+        private Button btnPause;
+        private Button btnContinue;
+        public static ProgressBar progressBar1;
+        public static System.Windows.Forms.Timer timer1;
+        public static Label lblNumberOfMelody;
     }
 }

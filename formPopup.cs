@@ -26,6 +26,7 @@ namespace GuessMelody
             fGame.cnt = 0;
             quiz.ReadParam();
             quiz.ReadMusic();
+            fGame.lblNumberOfMelody.Invoke(() => fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString());
             this.Close();
         }
 

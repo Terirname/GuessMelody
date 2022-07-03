@@ -134,12 +134,14 @@ namespace GuessMelody
                                     lmusicNumber = lrnd.Next(0, quiz.list.Count);
                                     _sourceStream = new AudioFileReader(quiz.list[lmusicNumber]);
                                     quiz.list.RemoveAt(lmusicNumber);
+                                    fGame.lblNumberOfMelody.Invoke(() => fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString());
                                     //countm = countm + 2;
                                     _sourceStream.Position = 0;                                   
                                 }
                                 else
                                 {
                                     _sourceStream = new AudioFileReader(quiz.list[countm + 1]);
+                                    fGame.lblNumberOfMelody.Invoke(() => fGame.lblNumberOfMelody.Text = (quiz.list.Count() - countm - 2).ToString());
                                     countm = countm + 2;
                                     _sourceStream.Position = 0;
                                 }
@@ -158,12 +160,14 @@ namespace GuessMelody
                                     lmusicNumber = lrnd.Next(0, quiz.list.Count);
                                     _sourceStream = new AudioFileReader(quiz.list[lmusicNumber]);
                                     quiz.list.RemoveAt(lmusicNumber);
+                                    fGame.lblNumberOfMelody.Invoke(() => fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString());
                                     //countm++;
                                     _sourceStream.Position = 0;
                                 }
                                 else
                                 {
                                     _sourceStream = new AudioFileReader(quiz.list[countm]);
+                                    fGame.lblNumberOfMelody.Invoke(() => fGame.lblNumberOfMelody.Text = (quiz.list.Count() - countm - 1).ToString());
                                     countm++;
                                     _sourceStream.Position = 0;
                                 }
