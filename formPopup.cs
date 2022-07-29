@@ -13,26 +13,38 @@ namespace GuessMelody
 {
     public partial class formPopup : Form
     {
+        
         public formPopup()
         {
             InitializeComponent();
-        }
-
+        }             
+        
         private void btnReset_Click(object sender, EventArgs e)
         {
-            fGame.cancelAudioConn();
+
+            fGame _fGame = new fGame();
+            quiz _quiz = new quiz();
+            connection _connection = new connection();
+            _connection.cancelAudioConn();
             LoopStream.countm = 0;
             LoopStream.i = 0;
             fGame.cnt = 0;
-            quiz.ReadParam();
-            quiz.ReadMusic();
-            fGame.lblNumberOfMelody.Invoke(() => fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString());
+            _fGame.timer1.Stop();
+            quiz.list.Clear();
+            _quiz.ReadParam();
+            _quiz.ReadMusic();
             this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void formPopup_Load(object sender, EventArgs e)
+        {
+             fGame _fGame = new fGame();
+            _fGame.timer1.Stop();
         }
     }
 }

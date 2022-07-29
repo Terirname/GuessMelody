@@ -2,8 +2,9 @@ namespace GuessMelody
 {
     public partial class fMain : Form
     {
-        fParam fp = new fParam();
-        fGame fg = new fGame();
+        private fParam fp = new fParam();
+        private fGame fg = new fGame();
+        private quiz _quiz = new quiz();
 
         public fMain()
         {
@@ -29,8 +30,8 @@ namespace GuessMelody
 
         private void fMain_Load(object sender, EventArgs e)
         {
-            quiz.ReadParam();
-            quiz.ReadMusic();
+            _quiz.ReadParam();
+            _quiz.ReadMusic();
         }
     }
 }

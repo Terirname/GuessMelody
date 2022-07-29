@@ -65,6 +65,7 @@
             this.Name = "formPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "All tracks played!";
+            this.Load += new System.EventHandler(this.formPopup_Load);
             this.ResumeLayout(false);
 
         }
