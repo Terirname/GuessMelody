@@ -45,7 +45,7 @@ namespace GuessMelody
                 rk.SetValue("MusicDuration", musicDuration);
                 rk.SetValue("AllDirectories", allDirectories);
                 rk.SetValue("Looped", LoopStream.cbLoop);
-                rk.SetValue("RandomStart", _fGame.cbRnd);
+                rk.SetValue("RandomStart", fGame.cbRnd);
             }
             finally
             {
@@ -67,7 +67,7 @@ namespace GuessMelody
                     musicDuration = (int)rk.GetValue("MusicDuration");
                     allDirectories = Convert.ToBoolean(rk.GetValue("AllDirectories", false));
                     LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue("Looped", false));
-                    _fGame.cbRnd = Convert.ToBoolean(rk.GetValue("RandomStart", false));
+                    fGame.cbRnd = Convert.ToBoolean(rk.GetValue("RandomStart", false));
                 }
                 
             }

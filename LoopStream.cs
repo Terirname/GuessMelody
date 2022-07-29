@@ -107,7 +107,7 @@ namespace GuessMelody
                                 _formPopup.ShowDialog();
                                 break;
                             }
-                            if (_fGame.cbRnd == false)
+                            if (fGame.cbRnd == false)
                             {
                                 quiz.list.Clear();
                                 _connection.cancelAudioConn();
@@ -126,7 +126,7 @@ namespace GuessMelody
                         {
                             if (i == 1)
                             {
-                                if (_fGame.cbRnd == true)
+                                if (fGame.cbRnd == true)
                                 {
                                     if (quiz.list.Count <= 0)
                                     {
@@ -164,7 +164,7 @@ namespace GuessMelody
                             }
                             else
                             {
-                                if (_fGame.cbRnd == true)
+                                if (fGame.cbRnd == true)
                                 {
                                     if (quiz.list.Count <= 0)
                                     {

@@ -43,7 +43,9 @@ namespace GuessMelody
 
         private void formPopup_Load(object sender, EventArgs e)
         {
-             fGame _fGame = new fGame();
+            connection _connection = new connection();
+            _connection.cancelAudioConn();
+            fGame _fGame = new fGame();
             _fGame.timer1.Stop();
         }
     }

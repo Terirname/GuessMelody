@@ -44,7 +44,7 @@ namespace GuessMelody
             fGame _fGame = new fGame();
             waveOutDevice = new WaveOutEvent();
             // audioFileReader = new AudioFileReader(@"E:\C# projects (lessons)\GuessMelody\Melodies\melody_1.mp3");
-            initialConn(LoopStream.cbLoop, _fGame.cbRnd);                            
+            initialConn(LoopStream.cbLoop, fGame.cbRnd);                            
         }
 
         public void cancelAudioConn()
