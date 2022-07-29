@@ -15,14 +15,12 @@ using System.Diagnostics;
 namespace GuessMelody
 {
     public partial class fGame : Form
-    {
-        //public static AudioFileReader audioFileReader;              
+    {              
         public static Random rnd = new Random();
-        public static int musicNumber = rnd.Next(0, quiz.list.Count);
+        public static int musicNumber;
         public static int cnt = 0;
-        public bool cbRnd = false;
+        public static bool cbRnd = false;
         public static int success = 0;
-        //formPopup _formPopup = new formPopup();
         quiz _quiz = new quiz();
         connection _connection = new connection();
         int musicDuration = quiz.musicDuration;
@@ -97,14 +95,7 @@ namespace GuessMelody
 
         public void playThePlaylist()
         {
-            if (cnt > quiz.list.Count - 1 && cbRnd) // back to begin
-            {               
-                cnt = 0;
-                progressBarToZero();
-                _connection.cancelAudioConn();
-                _connection.createAudioConn();    
-            }
-            else if (cnt > quiz.list.Count - 1 && !cbRnd) // stop playing and show popup menu
+            if ( (cnt > quiz.list.Count - 1) || (cbRnd && quiz.list.Count == 0) ) // stop playing and show popup menu
             {
                 progressBarToZero();
                 _connection.cancelAudioConn();
@@ -123,6 +114,7 @@ namespace GuessMelody
             {
                 if (cbRnd)
                 {
+                    musicNumber = rnd.Next(0, quiz.list.Count);
                     _connection.createAudioConn();
                     quiz.list.RemoveAt(musicNumber);
                     lblNumberOfMelody.Text = quiz.list.Count().ToString();
@@ -139,7 +131,7 @@ namespace GuessMelody
 
 
         private void btnNext_Click(object sender, EventArgs e)
-        {
+        {          
             nextMelody();
         }
 
@@ -160,18 +152,19 @@ namespace GuessMelody
             {
                 timer1.Stop();
                 progressBar1.Value = 0;
+                playThePlaylist();
                 return;
             }
             else
-            {
+            {                
                 progressBar1.Value++;
                 musicDuration--; 
-                lblMusicDuration.Text = musicDuration.ToString();
+                lblMusicDuration.Text = musicDuration.ToString();                
             } 
-            if (musicDuration == 0)
+            if (musicDuration == 0 && Convert.ToInt32(lblNumberOfMelody.Text) != 0)
             {
                 nextMelody();
-            }
+            }            
         }
 
         void gamePause()
@@ -225,29 +218,16 @@ namespace GuessMelody
 
         void nextMelody()
         {
+            musicDuration = quiz.musicDuration;
+            lblMusicDuration.Text = musicDuration.ToString();
+            progressBarToZero();
             timer1.Start();
             success = Int32.Parse(lblNumberOfMelody.Text);
             if (success >= 1)
             {
                 lblNumberOfMelody.Text = (success - 1).ToString();
-            }
-
-            if (quiz.list.Count == 0)
-            {
-                _connection.cancelAudioConn();
-                lblNumberOfMelody.Text = 0.ToString();
-                formPopup _formPopup = new formPopup();
-                _formPopup.ShowDialog();
-            }
-            //else if (cnt >= 1)
-            //{
-            //    //lblNumberOfMelody.Text = (quiz.list.Count - cnt - 1).ToString();
-            //    playThePlaylist();
-            //}
-            else
-            {
-                playThePlaylist();
-            }
+            }            
+            playThePlaylist();
         }
 
         private void fGame_FormClosed(object sender, FormClosedEventArgs e)

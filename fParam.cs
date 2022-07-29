@@ -31,7 +31,7 @@ namespace GuessMelody
             quiz.musicDuration = Convert.ToInt32(cbMusicDuration.Text);
             quiz.randomStart = cbRandomStart.Checked;
             LoopStream.cbLoop = cbLoop.Checked;
-            _fGame.cbRnd = cbRandomStart.Checked;
+            fGame.cbRnd = cbRandomStart.Checked;
             _quiz.WriteParam();
             //fGame.cancelAudioConn();
             LoopStream.countm = 0;
@@ -70,7 +70,7 @@ namespace GuessMelody
             cbMusicDuration.Text = quiz.musicDuration.ToString();
             cbRandomStart.Checked = quiz.randomStart;
             cbLoop.Checked = LoopStream.cbLoop;
-            cbRandomStart.Checked = _fGame.cbRnd;
+            cbRandomStart.Checked = fGame.cbRnd;
         }
 
         private void fParam_Load(object sender, EventArgs e)
