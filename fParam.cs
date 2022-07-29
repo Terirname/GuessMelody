@@ -15,6 +15,10 @@ namespace GuessMelody
 {
     public partial class fParam : Form
     {
+
+        fGame _fGame = new fGame();
+        quiz _quiz = new quiz();
+
         public fParam()
         {
             InitializeComponent();
@@ -27,14 +31,15 @@ namespace GuessMelody
             quiz.musicDuration = Convert.ToInt32(cbMusicDuration.Text);
             quiz.randomStart = cbRandomStart.Checked;
             LoopStream.cbLoop = cbLoop.Checked;
-            fGame.cbRnd = cbRandomStart.Checked;
-            quiz.WriteParam();
-            fGame.cancelAudioConn();
+            _fGame.cbRnd = cbRandomStart.Checked;
+            _quiz.WriteParam();
+            //fGame.cancelAudioConn();
             LoopStream.countm = 0;
             LoopStream.i = 0;
             fGame.cnt = 0;
-            quiz.ReadParam();
-            quiz.ReadMusic();
+            _quiz.ReadParam();
+            _quiz.ReadMusic();
+            Debug.WriteLine($"btnOK_Click: {cbGameDuration.Text}");
             this.Hide();
         }
 
@@ -65,7 +70,7 @@ namespace GuessMelody
             cbMusicDuration.Text = quiz.musicDuration.ToString();
             cbRandomStart.Checked = quiz.randomStart;
             cbLoop.Checked = LoopStream.cbLoop;
-            cbRandomStart.Checked = fGame.cbRnd;
+            cbRandomStart.Checked = _fGame.cbRnd;
         }
 
         private void fParam_Load(object sender, EventArgs e)
@@ -73,6 +78,7 @@ namespace GuessMelody
             setParam();
             listBox1.Items.Clear();
             listBox1.Items.AddRange(quiz.list.ToArray());
+            Debug.WriteLine($"fParam_Load: {cbGameDuration.Text}");
         }
 
         private void cbLoop_CheckedChanged(object sender, EventArgs e)

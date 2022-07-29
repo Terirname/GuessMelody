@@ -39,9 +39,10 @@
             this.lblCounter2 = new System.Windows.Forms.Label();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
-            lblNumberOfMelody = new System.Windows.Forms.Label();
-            progressBar1 = new System.Windows.Forms.ProgressBar();
-            timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblNumberOfMelody = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblMusicDuration = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -137,25 +138,35 @@
             // 
             // lblNumberOfMelody
             // 
-            lblNumberOfMelody.AutoSize = true;
-            lblNumberOfMelody.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblNumberOfMelody.Location = new System.Drawing.Point(419, 101);
-            lblNumberOfMelody.Name = "lblNumberOfMelody";
-            lblNumberOfMelody.Size = new System.Drawing.Size(27, 32);
-            lblNumberOfMelody.TabIndex = 9;
-            lblNumberOfMelody.Text = "0";
+            this.lblNumberOfMelody.AutoSize = true;
+            this.lblNumberOfMelody.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblNumberOfMelody.Location = new System.Drawing.Point(413, 99);
+            this.lblNumberOfMelody.Name = "lblNumberOfMelody";
+            this.lblNumberOfMelody.Size = new System.Drawing.Size(27, 32);
+            this.lblNumberOfMelody.TabIndex = 9;
+            this.lblNumberOfMelody.Text = "0";
             // 
             // progressBar1
             // 
-            progressBar1.Location = new System.Drawing.Point(21, 249);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new System.Drawing.Size(786, 44);
-            progressBar1.TabIndex = 10;
+            this.progressBar1.Location = new System.Drawing.Point(21, 249);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(786, 44);
+            this.progressBar1.TabIndex = 10;
             // 
             // timer1
             // 
-            timer1.Interval = 1000;
-            timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblMusicDuration
+            // 
+            this.lblMusicDuration.AutoSize = true;
+            this.lblMusicDuration.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblMusicDuration.Location = new System.Drawing.Point(407, 35);
+            this.lblMusicDuration.Name = "lblMusicDuration";
+            this.lblMusicDuration.Size = new System.Drawing.Size(33, 40);
+            this.lblMusicDuration.TabIndex = 11;
+            this.lblMusicDuration.Text = "0";
             // 
             // fGame
             // 
@@ -167,8 +178,9 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(839, 577);
             this.ControlBox = false;
-            this.Controls.Add(progressBar1);
-            this.Controls.Add(lblNumberOfMelody);
+            this.Controls.Add(this.lblMusicDuration);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.lblNumberOfMelody);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.lblCounter2);
@@ -180,10 +192,13 @@
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "fGame";
             this.Text = "Game";
+            this.Activated += new System.EventHandler(this.fGame_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fGame_FormClosed);
             this.Load += new System.EventHandler(this.fGame_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fGame_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,12 +211,13 @@
         private Button btnNext;
         private Label label1;
         private Label label2;
-        private Label lblCounter1;
-        private Label lblCounter2;
         private Button btnPause;
         private Button btnContinue;
-        public static ProgressBar progressBar1;
-        public static System.Windows.Forms.Timer timer1;
-        public static Label lblNumberOfMelody;
+        public Label lblCounter1;
+        public Label lblCounter2;
+        public Label lblMusicDuration;
+        public ProgressBar progressBar1;
+        public System.Windows.Forms.Timer timer1;
+        public Label lblNumberOfMelody;
     }
 }

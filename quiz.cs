@@ -9,16 +9,17 @@ using System.Diagnostics;
 
 namespace GuessMelody
 {
-    static class quiz
+     class quiz
     {
+        public static fGame _fGame = new fGame();
         static public List<string> list = new List<string>();
-        static public int gameDuration = 60;
-        static public int musicDuration = 10;
+        public static int gameDuration = 60;
+        public static int musicDuration = 10;
         static public bool randomStart = false;
         static public string lastFolder = "";
         static public bool allDirectories = false;
 
-        static public void ReadMusic()
+        public void ReadMusic()
         {
             try 
             { 
@@ -31,7 +32,7 @@ namespace GuessMelody
 
         static string regKeyName = "Software\\MyProgrammingProjects\\GuessMelody";
 
-        public static void WriteParam()
+        public void WriteParam()
         {
             RegistryKey rk = null;
             try
@@ -44,7 +45,7 @@ namespace GuessMelody
                 rk.SetValue("MusicDuration", musicDuration);
                 rk.SetValue("AllDirectories", allDirectories);
                 rk.SetValue("Looped", LoopStream.cbLoop);
-                rk.SetValue("RandomStart", fGame.cbRnd);
+                rk.SetValue("RandomStart", _fGame.cbRnd);
             }
             finally
             {
@@ -52,7 +53,7 @@ namespace GuessMelody
             }
         }
 
-        static public void ReadParam()
+        public void ReadParam()
         {
             RegistryKey rk = null;
             try
@@ -66,7 +67,7 @@ namespace GuessMelody
                     musicDuration = (int)rk.GetValue("MusicDuration");
                     allDirectories = Convert.ToBoolean(rk.GetValue("AllDirectories", false));
                     LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue("Looped", false));
-                    fGame.cbRnd = Convert.ToBoolean(rk.GetValue("RandomStart", false));
+                    _fGame.cbRnd = Convert.ToBoolean(rk.GetValue("RandomStart", false));
                 }
                 
             }
