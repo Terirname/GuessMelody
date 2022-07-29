@@ -152,7 +152,20 @@ namespace GuessMelody
             {
                 timer1.Stop();
                 progressBar1.Value = 0;
-                playThePlaylist();
+                if ((cnt > quiz.list.Count - 1) || (cbRnd && quiz.list.Count == 0)) // stop playing and show popup menu
+                {
+                    progressBarToZero();
+                    _connection.cancelAudioConn();
+                    lblNumberOfMelody.Text = 0.ToString();
+                    timer1.Stop();
+                    _formPopup.ShowDialog();
+                    if (cnt == 0)
+                    {
+                        lblCounter1.Text = "0";
+                        lblCounter2.Text = "0";
+                    }
+
+                }
                 return;
             }
             else
