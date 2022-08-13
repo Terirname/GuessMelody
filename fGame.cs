@@ -46,7 +46,7 @@ namespace GuessMelody
         {
             InitializeComponent();
             BackgroundImageLayout = ImageLayout.Stretch; // - stretch image of background
-            
+
         }
 
         private void FGame_Load(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace GuessMelody
             progressBar1.Minimum = 0;
             progressBar1.Maximum = Quiz.gameDuration;
             musicDuration = Quiz.musicDuration;
-            lblMusicDuration.Text = musicDuration.ToString();           
+            lblMusicDuration.Text = musicDuration.ToString();
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -99,11 +99,11 @@ namespace GuessMelody
 
         public void PlayThePlaylist()
         {
-            if ( (cnt > Quiz.list.Count - 1) || (cbRnd && Quiz.list.Count == 0) ) // stop playing and show popup menu
+            if ((cnt > Quiz.list.Count - 1) || (cbRnd && Quiz.list.Count == 0)) // stop playing and show popup menu
             {
                 ProgressBarToZero();
                 Connection.CancelAudioConn();
-                lblNumberOfMelody.Text = 0.ToString();               
+                lblNumberOfMelody.Text = 0.ToString();
                 timer1.Stop();
                 FormPopup _formPopup = new();
                 _formPopup.ShowDialog();
@@ -111,7 +111,7 @@ namespace GuessMelody
                 {
                     ResetTheScore();
                 }
-                
+
             }
             else // play music and increase counter of tracks count
             {
@@ -128,13 +128,13 @@ namespace GuessMelody
                     lblNumberOfMelody.Text = (Quiz.list.Count - cnt).ToString();
                     cnt++;
                 }
-                              
+
             }
         }
 
 
         private void BtnNext_Click(object sender, EventArgs e)
-        {          
+        {
             NextMelody();
         }
 
@@ -170,15 +170,15 @@ namespace GuessMelody
                 return;
             }
             else
-            {                
+            {
                 progressBar1.Value++;
-                musicDuration--; 
-                lblMusicDuration.Text = musicDuration.ToString();                
-            } 
+                musicDuration--;
+                lblMusicDuration.Text = musicDuration.ToString();
+            }
             if (musicDuration == 0 && Convert.ToInt32(lblNumberOfMelody.Text) != 0)
             {
                 NextMelody();
-            }            
+            }
         }
 
         void GamePause()
@@ -240,7 +240,7 @@ namespace GuessMelody
             if (success >= 1)
             {
                 lblNumberOfMelody.Text = (success - 1).ToString();
-            }            
+            }
             PlayThePlaylist();
         }
 
@@ -249,73 +249,63 @@ namespace GuessMelody
             timer1.Stop();
         }
 
-        private void FGame_KeyDown(object sender, KeyEventArgs e)
+        private void PlayerAnswer(KeyEventArgs btnPressed)
         {
-            if (e.KeyData == Keys.A)
+            string player = "";
+            Label label = new();
+
+            if (btnPressed.KeyData == Keys.A)
             {
-                if (Connection.waveOutDevice != null)
-                {
-                    Connection.waveOutDevice.Pause();
-                    timer1.Stop();
-                }
-                else
-                {
-                    timer1.Stop();
-                    return;
-                }
-                if (MessageBox.Show("Is the answer correct?", "Player 1", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                player = "Player 1";
+                label.Text = lblCounter1.Text;
+            }
+            else if (btnPressed.KeyData == Keys.Add)
+            {
+                player = "Player 2";
+                label.Text = lblCounter2.Text;
+            }
+
+            if (Connection.waveOutDevice != null)
+            {
+                Connection.waveOutDevice.Pause();
+                timer1.Stop();
+            }
+            else
+            {
+                timer1.Stop();
+                return;
+            }
+            if (MessageBox.Show("Is the answer correct?", player, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (btnPressed.KeyData == Keys.A)
                 {
                     lblCounter1.Text = Convert.ToString(Convert.ToInt32(lblCounter1.Text) + 1);
-                    NextMelody(); // - autoplay next song, but it can be run by the host
                 }
-                else
+                else if (btnPressed.KeyData == Keys.Add)
                 {
-                    if (Connection.waveOutDevice != null)
-                    {
-                        Connection.waveOutDevice.Play();
-                        timer1.Start();
-                    }
-                    else
-                    {
-                        string text = "Music not paused or not playing";
-                        MessageBox.Show(text);
-                    }
+                    lblCounter2.Text = Convert.ToString(Convert.ToInt32(lblCounter2.Text) + 1);
                 }
-                
-            }
 
-            if (e.KeyData == Keys.Add) // plus or numpad plus
+                NextMelody(); // - autoplay next song, but it can be run by the host
+            }
+            else
             {
                 if (Connection.waveOutDevice != null)
                 {
-                    Connection.waveOutDevice.Pause();
-                    timer1.Stop();
+                    Connection.waveOutDevice.Play();
+                    timer1.Start();
                 }
                 else
                 {
-                    timer1.Stop();
-                    return;
+                    string text = "Music not paused or not playing";
+                    MessageBox.Show(text);
                 }
-                if (MessageBox.Show("Is the answer correct?", "Player 2", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    lblCounter2.Text = Convert.ToString(Convert.ToInt32(lblCounter2.Text) + 1);
-                    NextMelody(); // - autoplay next song, but it can be run by the host
-                }
-                else
-                {
-                    if (Connection.waveOutDevice != null)
-                    {
-                        Connection.waveOutDevice.Play();
-                        timer1.Start();
-                    }
-                    else
-                    {
-                        string text = "Music not paused or not playing";
-                        MessageBox.Show(text);
-                    }
-                }
-
             }
+        }
+
+        private void FGame_KeyDown(object sender, KeyEventArgs e)
+        {
+            PlayerAnswer(e);
         }
                
     }
