@@ -1,6 +1,6 @@
 ﻿namespace GuessMelody
 {
-    partial class fGame
+    partial class FGame
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fGame));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FGame));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // btnPlay
             // 
@@ -63,7 +63,7 @@
             this.btnPlay.TabIndex = 1;
             this.btnPlay.Text = "Play/Stop";
             this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.btnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
             // 
             // btnNext
             // 
@@ -74,7 +74,7 @@
             this.btnNext.TabIndex = 2;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
             // label1
             // 
@@ -124,7 +124,7 @@
             this.btnPause.TabIndex = 7;
             this.btnPause.Text = "Pause";
             this.btnPause.UseVisualStyleBackColor = true;
-            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            this.btnPause.Click += new System.EventHandler(this.BtnPause_Click);
             // 
             // btnContinue
             // 
@@ -134,7 +134,7 @@
             this.btnContinue.TabIndex = 8;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
-            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
+            this.btnContinue.Click += new System.EventHandler(this.BtnContinue_Click);
             // 
             // lblNumberOfMelody
             // 
@@ -156,7 +156,7 @@
             // timer1
             // 
             this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // lblMusicDuration
             // 
@@ -168,7 +168,7 @@
             this.lblMusicDuration.TabIndex = 11;
             this.lblMusicDuration.Text = "0";
             // 
-            // fGame
+            // FGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,12 +193,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Name = "fGame";
-            this.Text = "Game";
-            this.Activated += new System.EventHandler(this.fGame_Activated);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fGame_FormClosed);
-            this.Load += new System.EventHandler(this.fGame_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fGame_KeyDown);
+            this.Name = "FGame";
+            this.Text = "Game";            
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FGame_FormClosed);
+            this.Load += new System.EventHandler(this.FGame_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FGame_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

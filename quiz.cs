@@ -9,17 +9,24 @@ using System.Diagnostics;
 
 namespace GuessMelody
 {
-     class quiz
+     class Quiz
     {
-        public static fGame _fGame = new fGame();
-        static public List<string> list = new List<string>();
+        public static FGame? _fGame = new();
+        static public List<string> list = new();
         public static int gameDuration = 60;
         public static int musicDuration = 10;
-        static public bool randomStart = false;
+        static public bool rndStart = false;
         static public string lastFolder = "";
         static public bool allDirectories = false;
+        private const string LastFolder = "LastFolder";
+        private const string RandomStart = "RandomStart";
+        private const string GameDuration = "GameDuration";
+        private const string MusicDuration = "MusicDuration";
+        private const string AllDirectories = "AllDirectories";
+        private const string Looped = "Looped";
 
-        public void ReadMusic()
+
+        public static void ReadMusic()
         {
             try 
             { 
@@ -30,22 +37,22 @@ namespace GuessMelody
             catch { }
         }
 
-        static string regKeyName = "Software\\MyProgrammingProjects\\GuessMelody";
+        static readonly string regKeyName = "Software\\MyProgrammingProjects\\GuessMelody";
 
-        public void WriteParam()
+        public static void WriteParam()
         {
-            RegistryKey rk = null;
+            RegistryKey? rk = null;
             try
             {
                 rk = Registry.CurrentUser.CreateSubKey(regKeyName);
                 if (rk == null) return;
-                rk.SetValue("LastFolder", lastFolder);
-                rk.SetValue("RandomStart", randomStart);
-                rk.SetValue("GameDuration", gameDuration);
-                rk.SetValue("MusicDuration", musicDuration);
-                rk.SetValue("AllDirectories", allDirectories);
-                rk.SetValue("Looped", LoopStream.cbLoop);
-                rk.SetValue("RandomStart", fGame.cbRnd);
+                rk.SetValue(LastFolder, lastFolder);
+                rk.SetValue(RandomStart, rndStart);
+                rk.SetValue(GameDuration, gameDuration);
+                rk.SetValue(MusicDuration, musicDuration);
+                rk.SetValue(AllDirectories, allDirectories);
+                rk.SetValue(Looped, LoopStream.cbLoop);
+                rk.SetValue(RandomStart, FGame.cbRnd);
             }
             finally
             {
@@ -53,21 +60,21 @@ namespace GuessMelody
             }
         }
 
-        public void ReadParam()
+        public static void ReadParam()
         {
-            RegistryKey rk = null;
+            RegistryKey? rk = null;
             try
             {
                 rk = Registry.CurrentUser.OpenSubKey(regKeyName);
                 if (rk != null)
                 {
-                    lastFolder = (string)rk.GetValue("LastFolder");
-                    gameDuration = (int)rk.GetValue("GameDuration");
-                    randomStart = Convert.ToBoolean(rk.GetValue("RandomStart", false));
-                    musicDuration = (int)rk.GetValue("MusicDuration");
-                    allDirectories = Convert.ToBoolean(rk.GetValue("AllDirectories", false));
-                    LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue("Looped", false));
-                    fGame.cbRnd = Convert.ToBoolean(rk.GetValue("RandomStart", false));
+                    lastFolder = (string)rk.GetValue(LastFolder)!;
+                    gameDuration = (int)rk.GetValue(GameDuration)!;
+                    rndStart = Convert.ToBoolean(rk.GetValue(RandomStart, false));
+                    musicDuration = (int)rk.GetValue(MusicDuration)!;
+                    allDirectories = Convert.ToBoolean(rk.GetValue(AllDirectories, false));
+                    LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue(Looped, false));
+                    FGame.cbRnd = Convert.ToBoolean(rk.GetValue(RandomStart, false));
                 }
                 
             }

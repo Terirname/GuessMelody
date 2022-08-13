@@ -11,41 +11,41 @@ using System.Diagnostics;
 
 namespace GuessMelody
 {
-    public partial class formPopup : Form
+    public partial class FormPopup : Form
     {
-        
-        public formPopup()
+        public static bool isCancel = false;
+
+        public FormPopup()
         {
             InitializeComponent();
         }             
         
-        private void btnReset_Click(object sender, EventArgs e)
+        private void BtnReset_Click(object sender, EventArgs e)
         {
 
-            fGame _fGame = new fGame();
-            quiz _quiz = new quiz();
-            connection _connection = new connection();
-            _connection.cancelAudioConn();
+            FGame _fGame = new();
+            Connection.CancelAudioConn();
             LoopStream.countm = 0;
             LoopStream.i = 0;
-            fGame.cnt = 0;
+            FGame.cnt = 0;
             _fGame.timer1.Stop();
-            quiz.list.Clear();
-            _quiz.ReadParam();
-            _quiz.ReadMusic();
+            Quiz.list.Clear();
+            Quiz.ReadParam();
+            Quiz.ReadMusic();
             this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
+            isCancel = true;
             this.Close();
         }
 
-        private void formPopup_Load(object sender, EventArgs e)
+        private void FormPopup_Load(object sender, EventArgs e)
         {
-            connection _connection = new connection();
-            _connection.cancelAudioConn();
-            fGame _fGame = new fGame();
+            isCancel = false;
+            Connection.CancelAudioConn();
+            FGame _fGame = new();
             _fGame.timer1.Stop();
         }
     }

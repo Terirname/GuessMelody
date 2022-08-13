@@ -13,82 +13,67 @@ using System.Diagnostics;
 
 namespace GuessMelody
 {
-    public partial class fParam : Form
+    public partial class FParam : Form
     {
-
-        fGame _fGame = new fGame();
-        quiz _quiz = new quiz();
-
-        public fParam()
+        public FParam()
         {
             InitializeComponent();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
-            quiz.allDirectories = cbAllFolders.Checked;
-            quiz.gameDuration = Convert.ToInt32(cbGameDuration.Text);
-            quiz.musicDuration = Convert.ToInt32(cbMusicDuration.Text);
-            quiz.randomStart = cbRandomStart.Checked;
+            Quiz.allDirectories = cbAllFolders.Checked;
+            Quiz.gameDuration = Convert.ToInt32(cbGameDuration.Text);
+            Quiz.musicDuration = Convert.ToInt32(cbMusicDuration.Text);
+            Quiz.rndStart = cbRandomStart.Checked;
             LoopStream.cbLoop = cbLoop.Checked;
-            fGame.cbRnd = cbRandomStart.Checked;
-            _quiz.WriteParam();
-            //fGame.cancelAudioConn();
+            FGame.cbRnd = cbRandomStart.Checked;
+            Quiz.WriteParam();
+            //FGame.CancelAudioConn();
             LoopStream.countm = 0;
             LoopStream.i = 0;
-            fGame.cnt = 0;
-            _quiz.ReadParam();
-            _quiz.ReadMusic();
-            Debug.WriteLine($"btnOK_Click: {cbGameDuration.Text}");
+            FGame.cnt = 0;
+            Quiz.ReadParam();
+            Quiz.ReadMusic();
             this.Hide();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
-            setParam();
+            SetParam();
             this.Hide();
         }
 
-        private void btnSelectFolder_Click(object sender, EventArgs e)
+        private void BtnSelectFolder_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            FolderBrowserDialog fbd = new();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 string[] music_list = Directory.GetFiles(fbd.SelectedPath, "*.mp3", cbAllFolders.Checked ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly); // -- Namespace System.IO included "Directory.GetFiles" and "SearchOption"
-                quiz.lastFolder = fbd.SelectedPath;
+                Quiz.lastFolder = fbd.SelectedPath;
                 listBox1.Items.Clear();
                 listBox1.Items.AddRange(music_list);
-                quiz.list.Clear();
-                quiz.list.AddRange(music_list);
+                Quiz.list.Clear();
+                Quiz.list.AddRange(music_list);
             }
         }
 
-        void setParam()
+        void SetParam()
         {
-            cbAllFolders.Checked = quiz.allDirectories;
-            cbGameDuration.Text = quiz.gameDuration.ToString();
-            cbMusicDuration.Text = quiz.musicDuration.ToString();
-            cbRandomStart.Checked = quiz.randomStart;
+            cbAllFolders.Checked = Quiz.allDirectories;
+            cbGameDuration.Text = Quiz.gameDuration.ToString();
+            cbMusicDuration.Text = Quiz.musicDuration.ToString();
+            cbRandomStart.Checked = Quiz.rndStart;
             cbLoop.Checked = LoopStream.cbLoop;
-            cbRandomStart.Checked = fGame.cbRnd;
+            cbRandomStart.Checked = FGame.cbRnd;
         }
 
-        private void fParam_Load(object sender, EventArgs e)
+        private void FParam_Load(object sender, EventArgs e)
         {
-            setParam();
+            SetParam();
             listBox1.Items.Clear();
-            listBox1.Items.AddRange(quiz.list.ToArray());
-            Debug.WriteLine($"fParam_Load: {cbGameDuration.Text}");
+            listBox1.Items.AddRange(Quiz.list.ToArray());
         }
-
-        private void cbLoop_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbRandomStart_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -8,48 +8,48 @@ using System.Diagnostics;
 
 namespace GuessMelody
 {
-    internal class connection
+    internal class Connection
     {       
-        public static IWavePlayer waveOutDevice;
-        public static AudioFileReader audioFileReader;
+        public static IWavePlayer? waveOutDevice;
+        public static AudioFileReader? audioFileReader;
 
-        public void initialConn(bool isLoop, bool isRnd)
+        public static void InitialConn(bool isLoop, bool isRnd)
         {
             if (isRnd)
             {
-                audioFileReader = new AudioFileReader(quiz.list[fGame.musicNumber]);
+                audioFileReader = new AudioFileReader(Quiz.list[FGame.musicNumber]);
             }
             else
             {
-                audioFileReader = new AudioFileReader(quiz.list[fGame.cnt]);
+                audioFileReader = new AudioFileReader(Quiz.list[FGame.cnt]);
             }
 
-            if (isLoop)
+            if (isLoop && waveOutDevice != null)
             {                
-                LoopStream loop = new LoopStream(audioFileReader);
-                waveOutDevice.Init(loop);                
+                LoopStream loop = new(audioFileReader);
+                waveOutDevice.Init(loop);
             }
-            else
+            else if (waveOutDevice != null)
             {
                 waveOutDevice.Init(audioFileReader);
             }
-
-            waveOutDevice.Play();
-
+            if (waveOutDevice != null)
+            {
+                waveOutDevice.Play();
+            }               
         }
 
-        public void createAudioConn()
+        public static void CreateAudioConn()
         {
-            cancelAudioConn();
-            fGame _fGame = new fGame();
+            CancelAudioConn();
             waveOutDevice = new WaveOutEvent();
             // audioFileReader = new AudioFileReader(@"E:\C# projects (lessons)\GuessMelody\Melodies\melody_1.mp3");
-            initialConn(LoopStream.cbLoop, fGame.cbRnd);                            
+            InitialConn(LoopStream.cbLoop, FGame.cbRnd);                            
         }
 
-        public void cancelAudioConn()
+        public static void CancelAudioConn()
         {
-            if (waveOutDevice != null)
+            if (waveOutDevice != null && audioFileReader != null)
             {
                 waveOutDevice.Stop();
                 audioFileReader.Dispose();

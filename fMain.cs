@@ -1,37 +1,35 @@
 namespace GuessMelody
 {
-    public partial class fMain : Form
+    public partial class FMain : Form
     {
-        private fParam fp = new fParam();
-        private fGame fg = new fGame();
-        private quiz _quiz = new quiz();
-
-        public fMain()
+        private readonly FParam fp = new();
+        private readonly FGame fg = new();
+        public FMain()
         {
             InitializeComponent();
             BackgroundImageLayout = ImageLayout.Stretch;
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
+        private void BtnPlay_Click(object sender, EventArgs e)
         {
             fg.ShowDialog();
         }
 
-        private void btnParam_Click(object sender, EventArgs e)
+        private void BtnParam_Click(object sender, EventArgs e)
         {
             
             fp.ShowDialog();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void fMain_Load(object sender, EventArgs e)
+        private void FMain_Load(object sender, EventArgs e)
         {
-            _quiz.ReadParam();
-            _quiz.ReadMusic();
+            Quiz.ReadParam();
+            Quiz.ReadMusic();
         }
     }
 }

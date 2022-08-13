@@ -1,6 +1,6 @@
 ﻿namespace GuessMelody
 {
-    partial class formPopup
+    partial class FormPopup
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             this.btnReset.TabIndex = 0;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // btnCancel
             // 
@@ -50,9 +50,9 @@
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // formPopup
+            // FormPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -62,10 +62,10 @@
             this.Controls.Add(this.btnReset);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "formPopup";
+            this.Name = "FormPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "All tracks played!";
-            this.Load += new System.EventHandler(this.formPopup_Load);
+            this.Load += new System.EventHandler(this.FormPopup_Load);
             this.ResumeLayout(false);
 
         }
