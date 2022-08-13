@@ -46,7 +46,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbRandomStart = new System.Windows.Forms.CheckBox();
             this.cbLoop = new System.Windows.Forms.CheckBox();
-            this.cbRndStart = new System.Windows.Forms.CheckBox();
+            this.cbRndPart = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -244,15 +244,15 @@
             this.cbLoop.Text = "Autoplay the next song";
             this.cbLoop.UseVisualStyleBackColor = true;
             // 
-            // cbRndStart
+            // cbRndPart
             // 
-            this.cbRndStart.AutoSize = true;
-            this.cbRndStart.Location = new System.Drawing.Point(362, 361);
-            this.cbRndStart.Name = "cbRndStart";
-            this.cbRndStart.Size = new System.Drawing.Size(262, 21);
-            this.cbRndStart.TabIndex = 9;
-            this.cbRndStart.Text = "Start from a random section of the track";
-            this.cbRndStart.UseVisualStyleBackColor = true;
+            this.cbRndPart.AutoSize = true;
+            this.cbRndPart.Location = new System.Drawing.Point(362, 361);
+            this.cbRndPart.Name = "cbRndPart";
+            this.cbRndPart.Size = new System.Drawing.Size(262, 21);
+            this.cbRndPart.TabIndex = 9;
+            this.cbRndPart.Text = "Start from a random section of the track";
+            this.cbRndPart.UseVisualStyleBackColor = true;
             // 
             // FParam
             // 
@@ -260,7 +260,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 510);
             this.ControlBox = false;
-            this.Controls.Add(this.cbRndStart);
+            this.Controls.Add(this.cbRndPart);
             this.Controls.Add(this.cbLoop);
             this.Controls.Add(this.cbRandomStart);
             this.Controls.Add(this.groupBox1);
@@ -302,6 +302,6 @@
         private ComboBox comboBox1;
         private Label label4;
         private Label label3;
-        public CheckBox cbRndStart;
+        public CheckBox cbRndPart;
     }
 }
