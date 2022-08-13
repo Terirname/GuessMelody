@@ -36,16 +36,17 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.cbMusicDuration = new System.Windows.Forms.ComboBox();
             this.cbGameDuration = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbRandomStart = new System.Windows.Forms.CheckBox();
             this.cbLoop = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbRndStart = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,6 +125,42 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Game Settings";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(93, 140);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 25);
+            this.comboBox2.TabIndex = 7;
+            this.comboBox2.Text = "+";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(93, 109);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 25);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.Text = "A";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 143);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 17);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Player 2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(27, 112);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Player 1";
+            // 
             // cbMusicDuration
             // 
             this.cbMusicDuration.FormattingEnabled = true;
@@ -192,9 +229,9 @@
             this.cbRandomStart.AutoSize = true;
             this.cbRandomStart.Location = new System.Drawing.Point(362, 334);
             this.cbRandomStart.Name = "cbRandomStart";
-            this.cbRandomStart.Size = new System.Drawing.Size(262, 21);
+            this.cbRandomStart.Size = new System.Drawing.Size(190, 21);
             this.cbRandomStart.TabIndex = 7;
-            this.cbRandomStart.Text = "Start from a random section of the track";
+            this.cbRandomStart.Text = "Start from the random track";
             this.cbRandomStart.UseVisualStyleBackColor = true;
             // 
             // cbLoop
@@ -207,41 +244,15 @@
             this.cbLoop.Text = "Autoplay the next song";
             this.cbLoop.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // cbRndStart
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 112);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 17);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Player 1";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 143);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 17);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Player 2";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(93, 109);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 25);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.Text = "A";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(93, 140);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 25);
-            this.comboBox2.TabIndex = 7;
-            this.comboBox2.Text = "+";
+            this.cbRndStart.AutoSize = true;
+            this.cbRndStart.Location = new System.Drawing.Point(362, 361);
+            this.cbRndStart.Name = "cbRndStart";
+            this.cbRndStart.Size = new System.Drawing.Size(262, 21);
+            this.cbRndStart.TabIndex = 9;
+            this.cbRndStart.Text = "Start from a random section of the track";
+            this.cbRndStart.UseVisualStyleBackColor = true;
             // 
             // FParam
             // 
@@ -249,6 +260,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 510);
             this.ControlBox = false;
+            this.Controls.Add(this.cbRndStart);
             this.Controls.Add(this.cbLoop);
             this.Controls.Add(this.cbRandomStart);
             this.Controls.Add(this.groupBox1);
@@ -290,5 +302,6 @@
         private ComboBox comboBox1;
         private Label label4;
         private Label label3;
+        public CheckBox cbRndStart;
     }
 }

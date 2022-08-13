@@ -12,16 +12,20 @@ namespace GuessMelody
     {       
         public static IWavePlayer? waveOutDevice;
         public static AudioFileReader? audioFileReader;
+        public static readonly Random rnd = new();
+        public static bool rndStart = false;
 
         public static void InitialConn(bool isLoop, bool isRnd)
         {
             if (isRnd)
             {
                 audioFileReader = new AudioFileReader(Quiz.list[FGame.musicNumber]);
+                RandomStart(audioFileReader);
             }
             else
             {
                 audioFileReader = new AudioFileReader(Quiz.list[FGame.cnt]);
+                RandomStart(audioFileReader);
             }
 
             if (isLoop && waveOutDevice != null)
@@ -33,10 +37,8 @@ namespace GuessMelody
             {
                 waveOutDevice.Init(audioFileReader);
             }
-            if (waveOutDevice != null)
-            {
-                waveOutDevice.Play();
-            }               
+
+            waveOutDevice!.Play();                         
         }
 
         public static void CreateAudioConn()
@@ -57,6 +59,18 @@ namespace GuessMelody
                 waveOutDevice = null;
                 audioFileReader = null;
             }
+        }
+
+        private static void RandomStart(AudioFileReader audioFileReader)
+        {
+            FParam FParam = new();
+            if (rndStart)
+            {
+                audioFileReader.Position = rnd.Next(0, (int)audioFileReader.Length / 2);
+                Debug.WriteLine(audioFileReader.Position);
+                Debug.WriteLine(audioFileReader.Length);
+            }
+            
         }
     }
 }
