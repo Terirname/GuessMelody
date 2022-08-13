@@ -25,9 +25,10 @@ namespace GuessMelody
             Quiz.allDirectories = cbAllFolders.Checked;
             Quiz.gameDuration = Convert.ToInt32(cbGameDuration.Text);
             Quiz.musicDuration = Convert.ToInt32(cbMusicDuration.Text);
-            Quiz.rndStart = cbRandomStart.Checked;
+            Quiz.startRndTrack = cbRandomStart.Checked;
             LoopStream.cbLoop = cbLoop.Checked;
             FGame.cbRnd = cbRandomStart.Checked;
+            Connection.rndStart = cbRndStart.Checked;
             Quiz.WriteParam();
             //FGame.CancelAudioConn();
             LoopStream.countm = 0;
@@ -63,9 +64,10 @@ namespace GuessMelody
             cbAllFolders.Checked = Quiz.allDirectories;
             cbGameDuration.Text = Quiz.gameDuration.ToString();
             cbMusicDuration.Text = Quiz.musicDuration.ToString();
-            cbRandomStart.Checked = Quiz.rndStart;
+            cbRandomStart.Checked = Quiz.startRndTrack;
             cbLoop.Checked = LoopStream.cbLoop;
             cbRandomStart.Checked = FGame.cbRnd;
+            cbRndStart.Checked = Connection.rndStart;
         }
 
         private void FParam_Load(object sender, EventArgs e)

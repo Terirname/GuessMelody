@@ -251,18 +251,17 @@ namespace GuessMelody
 
         private void PlayerAnswer(KeyEventArgs btnPressed)
         {
-            string player = "";
-            Label label = new();
-
+            Message message = new();
+            string player;
             if (btnPressed.KeyData == Keys.A)
             {
                 player = "Player 1";
-                label.Text = lblCounter1.Text;
+                message.lblMessage.Text = player;
             }
             else if (btnPressed.KeyData == Keys.Add)
             {
                 player = "Player 2";
-                label.Text = lblCounter2.Text;
+                message.lblMessage.Text = player;
             }
 
             if (Connection.waveOutDevice != null)
@@ -274,8 +273,9 @@ namespace GuessMelody
             {
                 timer1.Stop();
                 return;
-            }
-            if (MessageBox.Show("Is the answer correct?", player, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            }           
+
+            if (message.ShowDialog() == DialogResult.Yes)
             {
                 if (btnPressed.KeyData == Keys.A)
                 {
@@ -286,7 +286,7 @@ namespace GuessMelody
                     lblCounter2.Text = Convert.ToString(Convert.ToInt32(lblCounter2.Text) + 1);
                 }
 
-                NextMelody(); // - autoplay next song, but it can be run by the host
+                NextMelody(); // - autoplay the next song, but it can be run by the host
             }
             else
             {

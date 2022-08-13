@@ -15,10 +15,11 @@ namespace GuessMelody
         static public List<string> list = new();
         public static int gameDuration = 60;
         public static int musicDuration = 10;
-        static public bool rndStart = false;
+        static public bool startRndTrack = false;
         static public string lastFolder = "";
         static public bool allDirectories = false;
         private const string LastFolder = "LastFolder";
+        private const string StartRandomTrack = "StartRandomTrack";
         private const string RandomStart = "RandomStart";
         private const string GameDuration = "GameDuration";
         private const string MusicDuration = "MusicDuration";
@@ -47,12 +48,13 @@ namespace GuessMelody
                 rk = Registry.CurrentUser.CreateSubKey(regKeyName);
                 if (rk == null) return;
                 rk.SetValue(LastFolder, lastFolder);
-                rk.SetValue(RandomStart, rndStart);
+                rk.SetValue(StartRandomTrack, startRndTrack);
                 rk.SetValue(GameDuration, gameDuration);
                 rk.SetValue(MusicDuration, musicDuration);
                 rk.SetValue(AllDirectories, allDirectories);
                 rk.SetValue(Looped, LoopStream.cbLoop);
-                rk.SetValue(RandomStart, FGame.cbRnd);
+                rk.SetValue(StartRandomTrack, FGame.cbRnd);
+                rk.SetValue(RandomStart, Connection.rndStart);
             }
             finally
             {
@@ -70,11 +72,12 @@ namespace GuessMelody
                 {
                     lastFolder = (string)rk.GetValue(LastFolder)!;
                     gameDuration = (int)rk.GetValue(GameDuration)!;
-                    rndStart = Convert.ToBoolean(rk.GetValue(RandomStart, false));
+                    startRndTrack = Convert.ToBoolean(rk.GetValue(StartRandomTrack, false));
                     musicDuration = (int)rk.GetValue(MusicDuration)!;
                     allDirectories = Convert.ToBoolean(rk.GetValue(AllDirectories, false));
                     LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue(Looped, false));
-                    FGame.cbRnd = Convert.ToBoolean(rk.GetValue(RandomStart, false));
+                    FGame.cbRnd = Convert.ToBoolean(rk.GetValue(StartRandomTrack, false));
+                    Connection.rndStart = Convert.ToBoolean(rk.GetValue(RandomStart, false));
                 }
                 
             }
