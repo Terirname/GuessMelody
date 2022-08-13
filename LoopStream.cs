@@ -15,15 +15,14 @@ namespace GuessMelody
     /// </summary>
     public class LoopStream : WaveStream
     {
-        public static WaveStream _sourceStream;
+        public static WaveStream? _sourceStream;
         static public bool cbLoop = false;
         static public int countm = 0;
         static public int i = 0;
         public static int lmusicNumber;
-        public static Random lrnd = new Random();
-        public formPopup _formPopup = new formPopup();
-        public fGame _fGame = new fGame();
-        connection _connection = new connection();
+        public static Random lrnd = new();
+        public FormPopup _formPopup = new();
+        public FGame _fGame = new();
         /// <summary>
         /// Creates a new Loop stream
         /// </summary>
@@ -46,16 +45,20 @@ namespace GuessMelody
         /// Return source stream's wave format
         /// </summary>
 
-        public override WaveFormat WaveFormat
+        public override WaveFormat? WaveFormat
         {
             get {
-                if (quiz.list.Count <= 0)
+                if (Quiz.list.Count <= 0)
                 {
                     return null;
                 }
-                else 
+                else if (_sourceStream != null) 
                 { 
                     return _sourceStream.WaveFormat;
+                }
+                else
+                {
+                    return null;
                 }
             }
         }
@@ -66,7 +69,17 @@ namespace GuessMelody
 
         public override long Length
         {
-            get { return _sourceStream.Length; }
+            get 
+            { 
+                if (_sourceStream != null)
+                {
+                    return _sourceStream.Length;
+                }
+                else
+                {
+                    return 0;
+                } 
+            }
         }
 
         /// <summary>
@@ -75,8 +88,30 @@ namespace GuessMelody
 
         public override long Position
         {
-            get { return _sourceStream.Position; }
-            set { _sourceStream.Position = value; }
+            get 
+            {
+
+                if (_sourceStream != null)
+                {
+                    return _sourceStream.Position;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set 
+            {
+
+                if (_sourceStream != null)
+                {
+                    _sourceStream.Position = value;
+                }
+                else
+                {
+                    _sourceStream = null;
+                }
+            }
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -84,7 +119,7 @@ namespace GuessMelody
             int totalBytesRead = 0;
             
 
-            while (totalBytesRead < count)
+            while (totalBytesRead < count && _sourceStream != null)
             {                
                 int bytesRead = _sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
                 if (bytesRead == 0)
@@ -98,26 +133,26 @@ namespace GuessMelody
                         }
                         // loop                    
                         i++;
-                        if (countm > quiz.list.Count - 1)
+                        if (countm > Quiz.list.Count - 1)
                         {
-                            if (quiz.list.Count <= 0)
+                            if (Quiz.list.Count <= 0)
                             {
-                                quiz.list.Clear();
-                                _connection.cancelAudioConn();
+                                Quiz.list.Clear();
+                                Connection.CancelAudioConn();
                                 _formPopup.ShowDialog();
                                 break;
                             }
-                            if (fGame.cbRnd == false)
+                            if (FGame.cbRnd == false)
                             {
-                                quiz.list.Clear();
-                                _connection.cancelAudioConn();
+                                Quiz.list.Clear();
+                                Connection.CancelAudioConn();
                                 _formPopup.ShowDialog();
                                 break;
                             }
                             else
                             {
                                 countm = 0;
-                                _sourceStream = new AudioFileReader(quiz.list[countm]);
+                                _sourceStream = new AudioFileReader(Quiz.list[countm]);
                                 countm++;
                                 _sourceStream.Position = 0;
                             }
@@ -126,64 +161,64 @@ namespace GuessMelody
                         {
                             if (i == 1)
                             {
-                                if (fGame.cbRnd == true)
+                                if (FGame.cbRnd == true)
                                 {
-                                    if (quiz.list.Count <= 0)
+                                    if (Quiz.list.Count <= 0)
                                     {
                                         break;
                                     }
-                                    //quiz.list.RemoveAt(lmusicNumber);
-                                    lmusicNumber = lrnd.Next(0, quiz.list.Count);
-                                    _sourceStream = new AudioFileReader(quiz.list[lmusicNumber]);
-                                    quiz.list.RemoveAt(lmusicNumber);
+                                    //Quiz.list.RemoveAt(lmusicNumber);
+                                    lmusicNumber = lrnd.Next(0, Quiz.list.Count);
+                                    _sourceStream = new AudioFileReader(Quiz.list[lmusicNumber]);
+                                    Quiz.list.RemoveAt(lmusicNumber);
                                     try
                                     {
-                                        _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString());
+                                        _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = Quiz.list.Count.ToString());
                                     }
                                     catch
                                     {
-                                        _fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString();
+                                        _fGame.lblNumberOfMelody.Text = Quiz.list.Count.ToString();
                                     }
                                     //countm = countm + 2;
                                     _sourceStream.Position = 0;                                   
                                 }
                                 else
                                 {
-                                    _sourceStream = new AudioFileReader(quiz.list[countm + 1]);
+                                    _sourceStream = new AudioFileReader(Quiz.list[countm + 1]);
                                     try
                                     {
-                                        _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (quiz.list.Count() - countm - 2).ToString());
+                                        _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (Quiz.list.Count - countm - 2).ToString());
                                     }
                                     catch
                                     {
-                                        _fGame.lblNumberOfMelody.Text = (quiz.list.Count() - countm - 2).ToString();
+                                        _fGame.lblNumberOfMelody.Text = (Quiz.list.Count - countm - 2).ToString();
                                     }
-                                    countm = countm + 2;
+                                    countm += 2;
                                     _sourceStream.Position = 0;
                                 }
                             }
                             else
                             {
-                                if (fGame.cbRnd == true)
+                                if (FGame.cbRnd == true)
                                 {
-                                    if (quiz.list.Count <= 0)
+                                    if (Quiz.list.Count <= 0)
                                     {
-                                        quiz.list.Clear();
-                                        _connection.cancelAudioConn();
+                                        Quiz.list.Clear();
+                                        Connection.CancelAudioConn();
                                         _formPopup.ShowDialog();
                                         break;
                                     }
-                                    lmusicNumber = lrnd.Next(0, quiz.list.Count);
-                                    _sourceStream = new AudioFileReader(quiz.list[lmusicNumber]);
-                                    quiz.list.RemoveAt(lmusicNumber);
-                                    _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = quiz.list.Count().ToString());
+                                    lmusicNumber = lrnd.Next(0, Quiz.list.Count);
+                                    _sourceStream = new AudioFileReader(Quiz.list[lmusicNumber]);
+                                    Quiz.list.RemoveAt(lmusicNumber);
+                                    _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = Quiz.list.Count.ToString());
                                     //countm++;
                                     _sourceStream.Position = 0;
                                 }
                                 else
                                 {
-                                    _sourceStream = new AudioFileReader(quiz.list[countm]);
-                                    _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (quiz.list.Count() - countm - 1).ToString());
+                                    _sourceStream = new AudioFileReader(Quiz.list[countm]);
+                                    _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (Quiz.list.Count - countm - 1).ToString());
                                     countm++;
                                     _sourceStream.Position = 0;
                                 }

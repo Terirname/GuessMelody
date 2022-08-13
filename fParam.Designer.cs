@@ -1,6 +1,6 @@
 ﻿namespace GuessMelody
 {
-    partial class fParam
+    partial class FParam
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fParam));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FParam));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.btnClearList = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@
             this.btnSelectFolder.TabIndex = 1;
             this.btnSelectFolder.Text = "Select folder";
             this.btnSelectFolder.UseVisualStyleBackColor = true;
-            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
+            this.btnSelectFolder.Click += new System.EventHandler(this.BtnSelectFolder_Click);
             // 
             // btnClearList
             // 
@@ -95,7 +95,7 @@
             this.btnOK.TabIndex = 4;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // btnCancel
             // 
@@ -105,7 +105,7 @@
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // groupBox1
             // 
@@ -196,7 +196,6 @@
             this.cbRandomStart.TabIndex = 7;
             this.cbRandomStart.Text = "Start from a random section of the track";
             this.cbRandomStart.UseVisualStyleBackColor = true;
-            this.cbRandomStart.CheckedChanged += new System.EventHandler(this.cbRandomStart_CheckedChanged);
             // 
             // cbLoop
             // 
@@ -207,7 +206,6 @@
             this.cbLoop.TabIndex = 8;
             this.cbLoop.Text = "Autoplay the next song";
             this.cbLoop.UseVisualStyleBackColor = true;
-            this.cbLoop.CheckedChanged += new System.EventHandler(this.cbLoop_CheckedChanged);
             // 
             // label3
             // 
@@ -245,7 +243,7 @@
             this.comboBox2.TabIndex = 7;
             this.comboBox2.Text = "+";
             // 
-            // fParam
+            // FParam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -263,9 +261,9 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "fParam";
+            this.Name = "FParam";
             this.Text = "Settings";
-            this.Load += new System.EventHandler(this.fParam_Load);
+            this.Load += new System.EventHandler(this.FParam_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

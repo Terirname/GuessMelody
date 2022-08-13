@@ -1,6 +1,6 @@
 ﻿namespace GuessMelody
 {
-    partial class fMain
+    partial class FMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FMain));
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnParam = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@
             this.btnPlay.TabIndex = 1;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.btnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
             // 
             // btnParam
             // 
@@ -56,7 +56,7 @@
             this.btnParam.TabIndex = 3;
             this.btnParam.Text = "Settings";
             this.btnParam.UseVisualStyleBackColor = true;
-            this.btnParam.Click += new System.EventHandler(this.btnParam_Click);
+            this.btnParam.Click += new System.EventHandler(this.BtnParam_Click);
             // 
             // btnExit
             // 
@@ -68,9 +68,9 @@
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
-            // fMain
+            // FMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,9 +84,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.Name = "fMain";
+            this.Name = "FMain";
             this.Text = "Guess melody!";
-            this.Load += new System.EventHandler(this.fMain_Load);
+            this.Load += new System.EventHandler(this.FMain_Load);
             this.ResumeLayout(false);
 
         }
