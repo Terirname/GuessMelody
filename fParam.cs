@@ -28,9 +28,8 @@ namespace GuessMelody
             Quiz.startRndTrack = cbRandomStart.Checked;
             LoopStream.cbLoop = cbLoop.Checked;
             FGame.cbRnd = cbRandomStart.Checked;
-            Connection.rndStart = cbRndStart.Checked;
+            Connection.rndPart = cbRndPart.Checked;
             Quiz.WriteParam();
-            //FGame.CancelAudioConn();
             LoopStream.countm = 0;
             LoopStream.i = 0;
             FGame.cnt = 0;
@@ -67,7 +66,7 @@ namespace GuessMelody
             cbRandomStart.Checked = Quiz.startRndTrack;
             cbLoop.Checked = LoopStream.cbLoop;
             cbRandomStart.Checked = FGame.cbRnd;
-            cbRndStart.Checked = Connection.rndStart;
+            cbRndPart.Checked = Connection.rndPart;
         }
 
         private void FParam_Load(object sender, EventArgs e)

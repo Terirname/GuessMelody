@@ -20,7 +20,7 @@ namespace GuessMelody
         static public bool allDirectories = false;
         private const string LastFolder = "LastFolder";
         private const string StartRandomTrack = "StartRandomTrack";
-        private const string RandomStart = "RandomStart";
+        private const string RandomPart = "RandomPart";
         private const string GameDuration = "GameDuration";
         private const string MusicDuration = "MusicDuration";
         private const string AllDirectories = "AllDirectories";
@@ -54,7 +54,7 @@ namespace GuessMelody
                 rk.SetValue(AllDirectories, allDirectories);
                 rk.SetValue(Looped, LoopStream.cbLoop);
                 rk.SetValue(StartRandomTrack, FGame.cbRnd);
-                rk.SetValue(RandomStart, Connection.rndStart);
+                rk.SetValue(RandomPart, Connection.rndPart);
             }
             finally
             {
@@ -77,7 +77,7 @@ namespace GuessMelody
                     allDirectories = Convert.ToBoolean(rk.GetValue(AllDirectories, false));
                     LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue(Looped, false));
                     FGame.cbRnd = Convert.ToBoolean(rk.GetValue(StartRandomTrack, false));
-                    Connection.rndStart = Convert.ToBoolean(rk.GetValue(RandomStart, false));
+                    Connection.rndPart = Convert.ToBoolean(rk.GetValue(RandomPart, false));
                 }
                 
             }
