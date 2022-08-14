@@ -15,21 +15,41 @@ namespace GuessMelody
 
         }
 
-        public static IWavePlayer? waveOutDevice;
-        public static AudioFileReader? audioFileReader;
+        private static IWavePlayer? waveOutDevice;
+        private static AudioFileReader? audioFileReader;
         public static readonly Random rnd = new();
-        public static bool rndPart;
+        private static bool rndPart;
+
+        public static IWavePlayer? Get_waveOutDevice()
+        {
+            return waveOutDevice;
+        }
+
+        public static void Set_waveOutDevice(IWavePlayer? waveOutDevice_public)
+        {
+             waveOutDevice = waveOutDevice_public;
+        }
+        public static void Set_rndPart(bool rndPart_public)
+        {
+            rndPart = rndPart_public;
+        }
+
+        public static bool Get_rndPart()
+        {
+            return rndPart;
+        }
+
 
         public static void InitialConn(bool isLoop, bool isRnd)
         {
             if (isRnd)
             {
-                audioFileReader = new AudioFileReader(Quiz.list[FGame.musicNumber]);
+                audioFileReader = new AudioFileReader(Quiz.Get_list()[FGame.Get_musicNumber()]);
                 RandomPart(audioFileReader);
             }
             else
             {
-                audioFileReader = new AudioFileReader(Quiz.list[FGame.cnt]);
+                audioFileReader = new AudioFileReader(Quiz.Get_list()[FGame.Get_cnt()]);
                 RandomPart(audioFileReader);
             }
 
@@ -51,7 +71,7 @@ namespace GuessMelody
             CancelAudioConn();
             waveOutDevice = new WaveOutEvent();
             // audioFileReader = new AudioFileReader(@"E:\C# projects (lessons)\GuessMelody\Melodies\melody_1.mp3");
-            InitialConn(LoopStream.cbLoop, FGame.cbRnd);                            
+            InitialConn(LoopStream.Get_cbLoop(), FGame.Get_cbRnd());                            
         }
 
         public static void CancelAudioConn()
