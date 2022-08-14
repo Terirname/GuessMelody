@@ -18,10 +18,10 @@ namespace GuessMelody
     public partial class FGame : Form
     {
         public static readonly Random rnd = new();
-        public static int musicNumber;
-        public static int cnt = 0;
-        public static bool cbRnd = false;
-        public static int success = 0;
+        internal static int musicNumber;
+        internal static int cnt = 0;
+        internal static bool cbRnd = false;
+        internal static int success = 0;
         int musicDuration = Quiz.musicDuration;
 
         public void ProgressBarToZero()

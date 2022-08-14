@@ -75,6 +75,6 @@ namespace GuessMelody
             listBox1.Items.Clear();
             listBox1.Items.AddRange(Quiz.list.ToArray());
         }
-        
+
     }
 }
