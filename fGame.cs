@@ -66,7 +66,7 @@ namespace GuessMelody
             ProgressBarToZero();
             Connection.CancelAudioConn();
             LoopStream.countm = 0;
-            LoopStream.i = 0;
+            LoopStream.SetI(0);
             cnt = 0;
             Quiz.ReadParam();
             Quiz.ReadMusic();

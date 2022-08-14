@@ -31,7 +31,7 @@ namespace GuessMelody
             Connection.rndPart = cbRndPart.Checked;
             Quiz.WriteParam();
             LoopStream.countm = 0;
-            LoopStream.i = 0;
+            LoopStream.SetI(0);
             FGame.cnt = 0;
             Quiz.ReadParam();
             Quiz.ReadMusic();

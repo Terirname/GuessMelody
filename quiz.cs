@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.Win32;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GuessMelody
 {
-     internal class Quiz
+    internal class Quiz
     {
+        protected Quiz()
+        {
+
+        }
+
         public static FGame? _fGame = new();
         public static List<string> list = new();
         public static int gameDuration = 60;
@@ -37,7 +43,7 @@ namespace GuessMelody
             }
             catch 
             {
-                return;
+                MessageBox.Show("Error with reading the music_files! Please try again or select another path");
             }
         }
 
