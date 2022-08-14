@@ -19,9 +19,9 @@ namespace GuessMelody
     {
         public static readonly Random rnd = new();
         internal static int musicNumber;
-        internal static int cnt = 0;
-        internal static bool cbRnd = false;
-        internal static int success = 0;
+        internal static int cnt;
+        internal static bool cbRnd;
+        internal static int success;
         int musicDuration = Quiz.musicDuration;
 
         public void ProgressBarToZero()
@@ -181,6 +181,18 @@ namespace GuessMelody
             }
         }
 
+        private static void ShowMsgBoxForPause()
+        {
+            string text = "Music not playing";
+            MessageBox.Show(text);
+        }
+
+        private static void ShowMsgBoxForContinue()
+        {
+            string text = "Music not paused or not playing";
+            MessageBox.Show(text);
+        }
+
         void GamePause()
         {
             if (Connection.waveOutDevice != null && Connection.waveOutDevice.PlaybackState == PlaybackState.Playing)
@@ -190,8 +202,7 @@ namespace GuessMelody
             }
             else if (Connection.waveOutDevice == null)
             {
-                string text = "Music not playing";
-                MessageBox.Show(text);
+                ShowMsgBoxForPause();
             }
             else if (Connection.waveOutDevice != null && Connection.waveOutDevice.PlaybackState == PlaybackState.Paused)
             {
@@ -200,8 +211,7 @@ namespace GuessMelody
             }
             else if (Connection.waveOutDevice != null && Connection.waveOutDevice.PlaybackState == PlaybackState.Stopped)
             {
-                string text = "Music not playing";
-                MessageBox.Show(text);
+                ShowMsgBoxForPause();
             }
 
         }
@@ -215,8 +225,7 @@ namespace GuessMelody
             }
             else if (Connection.waveOutDevice == null)
             {
-                string text = "Music not paused or not playing";
-                MessageBox.Show(text);
+                ShowMsgBoxForContinue();
             }
             else if (Connection.waveOutDevice != null && Connection.waveOutDevice.PlaybackState == PlaybackState.Playing)
             {
@@ -225,8 +234,7 @@ namespace GuessMelody
             }
             else if (Connection.waveOutDevice != null && Connection.waveOutDevice.PlaybackState == PlaybackState.Stopped)
             {
-                string text = "Music not paused or not playing";
-                MessageBox.Show(text);
+                ShowMsgBoxForContinue();
             }
         }
 

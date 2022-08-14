@@ -9,11 +9,16 @@ using System.Diagnostics;
 namespace GuessMelody
 {
     internal class Connection
-    {       
+    {   
+        protected Connection()
+        {
+
+        }
+
         public static IWavePlayer? waveOutDevice;
         public static AudioFileReader? audioFileReader;
         public static readonly Random rnd = new();
-        public static bool rndPart = false;
+        public static bool rndPart;
 
         public static void InitialConn(bool isLoop, bool isRnd)
         {
