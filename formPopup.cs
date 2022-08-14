@@ -26,7 +26,7 @@ namespace GuessMelody
             FGame _fGame = new();
             Connection.CancelAudioConn();
             LoopStream.countm = 0;
-            LoopStream.i = 0;
+            LoopStream.SetI(0);
             FGame.cnt = 0;
             _fGame.timer1.Stop();
             Quiz.list.Clear();

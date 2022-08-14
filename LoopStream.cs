@@ -15,10 +15,10 @@ namespace GuessMelody
     /// </summary>
     internal class LoopStream : WaveStream
     {
-        private static WaveStream? _sourceStream;
+        private WaveStream? _sourceStream;
         internal static bool cbLoop;
         internal static int countm;
-        internal static int i;
+        private static int i;
         internal static int lmusicNumber;
         private readonly static Random lrnd = new();
         private readonly FormPopup _formPopup = new();
@@ -28,6 +28,17 @@ namespace GuessMelody
         /// </summary>
         /// <param name="sourceStream">The stream to read from. Note: the Read method of this stream should return 0 when it reaches the end
         /// or else we will not loop to the start again.</param>
+
+        public static void SetI(int i_public)
+        {
+            i = i_public;
+        }
+
+        public static int GetI()
+        {
+            int i_public = i;
+            return i_public;
+        }
 
         public LoopStream(WaveStream sourceStream)
         {
@@ -131,7 +142,8 @@ namespace GuessMelody
                             // something wrong with the source stream
                             break;
                         }
-                        // loop                    
+                        // loop
+                        SetI(i++);
                         i++;
                         if (countm > Quiz.list.Count - 1)
                         {
