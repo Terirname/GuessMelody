@@ -13,23 +13,28 @@ namespace GuessMelody
 {
     public partial class FormPopup : Form
     {
-        internal static bool isCancel;
+        private static bool isCancel;
 
         public FormPopup()
         {
             InitializeComponent();
-        }             
-        
+        }
+
+        public static bool Get_isCancel()
+        {
+            return isCancel;
+        }
+
         private void BtnReset_Click(object sender, EventArgs e)
         {
 
             FGame _fGame = new();
             Connection.CancelAudioConn();
-            LoopStream.countm = 0;
+            LoopStream.Set_countm(0);
             LoopStream.SetI(0);
-            FGame.cnt = 0;
+            FGame.Set_cnt(0);
             _fGame.timer1.Stop();
-            Quiz.list.Clear();
+            Quiz.Get_list().Clear();
             Quiz.ReadParam();
             Quiz.ReadMusic();
             this.Close();

@@ -22,17 +22,17 @@ namespace GuessMelody
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
-            Quiz.allDirectories = cbAllFolders.Checked;
-            Quiz.gameDuration = Convert.ToInt32(cbGameDuration.Text);
-            Quiz.musicDuration = Convert.ToInt32(cbMusicDuration.Text);
-            Quiz.startRndTrack = cbRandomStart.Checked;
-            LoopStream.cbLoop = cbLoop.Checked;
-            FGame.cbRnd = cbRandomStart.Checked;
-            Connection.rndPart = cbRndPart.Checked;
+            Quiz.Set_allDirectories(cbAllFolders.Checked);
+            Quiz.Set_gameDuration(Convert.ToInt32(cbGameDuration.Text));
+            Quiz.Set_musicDuration(Convert.ToInt32(cbMusicDuration.Text));
+            Quiz.Set_startRndTrack(cbRandomStart.Checked);
+            LoopStream.Set_cbLoop(cbLoop.Checked);
+            FGame.Set_cbRnd(cbRandomStart.Checked);
+            Connection.Set_rndPart(cbRndPart.Checked);
             Quiz.WriteParam();
-            LoopStream.countm = 0;
+            LoopStream.Set_countm(0);
             LoopStream.SetI(0);
-            FGame.cnt = 0;
+            FGame.Set_cnt(0);
             Quiz.ReadParam();
             Quiz.ReadMusic();
             this.Hide();
@@ -50,30 +50,30 @@ namespace GuessMelody
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 string[] music_list = Directory.GetFiles(fbd.SelectedPath, "*.mp3", cbAllFolders.Checked ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly); // -- Namespace System.IO included "Directory.GetFiles" and "SearchOption"
-                Quiz.lastFolder = fbd.SelectedPath;
+                Quiz.Set_lastFolder(fbd.SelectedPath);
                 listBox1.Items.Clear();
                 listBox1.Items.AddRange(music_list);
-                Quiz.list.Clear();
-                Quiz.list.AddRange(music_list);
+                Quiz.Get_list().Clear();
+                Quiz.Get_list().AddRange(music_list);
             }
         }
 
         void SetParam()
         {
-            cbAllFolders.Checked = Quiz.allDirectories;
-            cbGameDuration.Text = Quiz.gameDuration.ToString();
-            cbMusicDuration.Text = Quiz.musicDuration.ToString();
-            cbRandomStart.Checked = Quiz.startRndTrack;
-            cbLoop.Checked = LoopStream.cbLoop;
-            cbRandomStart.Checked = FGame.cbRnd;
-            cbRndPart.Checked = Connection.rndPart;
+            cbAllFolders.Checked = Quiz.Get_allDirectories();
+            cbGameDuration.Text = Quiz.Get_gameDuration().ToString();
+            cbMusicDuration.Text = Quiz.Get_musicDuration().ToString();
+            cbRandomStart.Checked = Quiz.Get_startRndTrack();
+            cbLoop.Checked = LoopStream.Get_cbLoop();
+            cbRandomStart.Checked = FGame.Get_cbRnd();
+            cbRndPart.Checked = Connection.Get_rndPart();
         }
 
         private void FParam_Load(object sender, EventArgs e)
         {
             SetParam();
             listBox1.Items.Clear();
-            listBox1.Items.AddRange(Quiz.list.ToArray());
+            listBox1.Items.AddRange(Quiz.Get_list().ToArray());
         }
 
     }

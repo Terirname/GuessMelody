@@ -17,13 +17,12 @@ namespace GuessMelody
 
         }
 
-        public static FGame? _fGame = new();
-        public static List<string> list = new();
-        public static int gameDuration = 60;
-        public static int musicDuration = 10;
-        public static bool startRndTrack;
-        public static string lastFolder = "";
-        public static bool allDirectories;
+        private readonly static List<string> list = new();
+        private static int gameDuration = 60;
+        private static int musicDuration = 10;
+        private static bool startRndTrack;
+        private static string lastFolder = "";
+        private static bool allDirectories;
         private const string LastFolder = "LastFolder";
         private const string StartRandomTrack = "StartRandomTrack";
         private const string RandomPart = "RandomPart";
@@ -32,7 +31,55 @@ namespace GuessMelody
         private const string AllDirectories = "AllDirectories";
         private const string Looped = "Looped";
 
+        public static void Set_gameDuration(int gameDuration_public)
+        {
+            gameDuration = gameDuration_public;
+        }
 
+        public static int Get_gameDuration()
+        {
+            return gameDuration;
+        }
+
+        public static List<string> Get_list()
+        {
+            return list;
+        }
+
+        public static void Set_musicDuration(int musicDuration_public)
+        {
+            musicDuration = musicDuration_public;
+        }
+
+        public static int Get_musicDuration()
+        {
+            return musicDuration;
+        }
+        public static void Set_startRndTrack(bool startRndTrack_public)
+        {
+            startRndTrack = startRndTrack_public;
+        }
+
+        public static bool Get_startRndTrack()
+        {
+            return startRndTrack;
+        }
+        public static string Get_lastFolder()
+        {
+            return lastFolder;
+        }
+        public static void Set_lastFolder(string lastFolder_public)
+        {
+            lastFolder = lastFolder_public;
+        }
+        public static bool Get_allDirectories()
+        {
+            return allDirectories;
+        }
+        public static void Set_allDirectories(bool allDirectories_public)
+        {
+            allDirectories = allDirectories_public;
+        }
         public static void ReadMusic()
         {
             try 
@@ -64,9 +111,9 @@ namespace GuessMelody
                 rk.SetValue(GameDuration, gameDuration);
                 rk.SetValue(MusicDuration, musicDuration);
                 rk.SetValue(AllDirectories, allDirectories);
-                rk.SetValue(Looped, LoopStream.cbLoop);
-                rk.SetValue(StartRandomTrack, FGame.cbRnd);
-                rk.SetValue(RandomPart, Connection.rndPart);
+                rk.SetValue(Looped, LoopStream.Get_cbLoop());
+                rk.SetValue(StartRandomTrack, FGame.Get_cbRnd());
+                rk.SetValue(RandomPart, Connection.Get_rndPart());
             }
             finally
             {
@@ -90,9 +137,9 @@ namespace GuessMelody
                     startRndTrack = Convert.ToBoolean(rk.GetValue(StartRandomTrack, false));
                     musicDuration = (int)rk.GetValue(MusicDuration)!;
                     allDirectories = Convert.ToBoolean(rk.GetValue(AllDirectories, false));
-                    LoopStream.cbLoop = Convert.ToBoolean(rk.GetValue(Looped, false));
-                    FGame.cbRnd = Convert.ToBoolean(rk.GetValue(StartRandomTrack, false));
-                    Connection.rndPart = Convert.ToBoolean(rk.GetValue(RandomPart, false));
+                    LoopStream.Set_cbLoop(Convert.ToBoolean(rk.GetValue(Looped, false)));
+                    FGame.Set_cbRnd(Convert.ToBoolean(rk.GetValue(StartRandomTrack, false)));
+                    Connection.Set_rndPart(Convert.ToBoolean(rk.GetValue(RandomPart, false)));
                 }
                 
             }
