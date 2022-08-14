@@ -13,16 +13,16 @@ namespace GuessMelody
     /// <summary>
     /// Stream for looping playback
     /// </summary>
-    public class LoopStream : WaveStream
+    internal class LoopStream : WaveStream
     {
         private static WaveStream? _sourceStream;
-        internal static bool cbLoop = false;
-        internal static int countm = 0;
-        internal static int i = 0;
+        internal static bool cbLoop;
+        internal static int countm;
+        internal static int i;
         internal static int lmusicNumber;
-        internal static Random lrnd = new();
-        public FormPopup _formPopup = new();
-        public FGame _fGame = new();
+        private readonly static Random lrnd = new();
+        private readonly FormPopup _formPopup = new();
+        private readonly FGame _fGame = new();
         /// <summary>
         /// Creates a new Loop stream
         /// </summary>

@@ -13,7 +13,7 @@ namespace GuessMelody
 {
     public partial class FormPopup : Form
     {
-        internal static bool isCancel = false;
+        internal static bool isCancel;
 
         public FormPopup()
         {

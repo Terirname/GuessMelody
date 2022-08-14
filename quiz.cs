@@ -9,15 +9,15 @@ using System.Diagnostics;
 
 namespace GuessMelody
 {
-     class Quiz
+     internal class Quiz
     {
         public static FGame? _fGame = new();
-        static public List<string> list = new();
+        public static List<string> list = new();
         public static int gameDuration = 60;
         public static int musicDuration = 10;
-        static public bool startRndTrack = false;
-        static public string lastFolder = "";
-        static public bool allDirectories = false;
+        public static bool startRndTrack;
+        public static string lastFolder = "";
+        public static bool allDirectories;
         private const string LastFolder = "LastFolder";
         private const string StartRandomTrack = "StartRandomTrack";
         private const string RandomPart = "RandomPart";
@@ -35,7 +35,10 @@ namespace GuessMelody
                 list.Clear();
                 list.AddRange(music_files);
             }
-            catch { }
+            catch 
+            {
+                return;
+            }
         }
 
         static readonly string regKeyName = "Software\\MyProgrammingProjects\\GuessMelody";
@@ -46,7 +49,10 @@ namespace GuessMelody
             try
             {
                 rk = Registry.CurrentUser.CreateSubKey(regKeyName);
-                if (rk == null) return;
+                if (rk == null) 
+                { 
+                    return; 
+                }
                 rk.SetValue(LastFolder, lastFolder);
                 rk.SetValue(StartRandomTrack, startRndTrack);
                 rk.SetValue(GameDuration, gameDuration);
@@ -58,7 +64,10 @@ namespace GuessMelody
             }
             finally
             {
-                if (rk != null) rk.Close();
+                if (rk != null)
+                {
+                    rk.Close();
+                }
             }
         }
 
@@ -83,7 +92,10 @@ namespace GuessMelody
             }
             finally
             {
-                if (rk != null) rk.Close();
+                if (rk != null)
+                {
+                    rk.Close();
+                }
             }
         }
     }
