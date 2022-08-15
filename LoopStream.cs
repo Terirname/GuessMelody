@@ -182,7 +182,7 @@ namespace GuessMelody
                             {
                                 Set_countm(0);
                                 _sourceStream = new AudioFileReader(Quiz.Get_list()[Get_countm()]);
-                                Set_countm(countm++);
+                                Set_countm(countm + 1);
                                 _sourceStream.Position = 0;
                             }
                         }
