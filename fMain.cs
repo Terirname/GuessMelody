@@ -9,7 +9,6 @@ namespace GuessMelody
             InitializeComponent();
             BackgroundImageLayout = ImageLayout.Stretch;
         }
-
         private void BtnPlay_Click(object sender, EventArgs e)
         {
             fg.ShowDialog();
