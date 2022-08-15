@@ -24,7 +24,6 @@ namespace GuessMelody
         {
             return waveOutDevice;
         }
-
         public static void Set_waveOutDevice(IWavePlayer? waveOutDevice_public)
         {
              waveOutDevice = waveOutDevice_public;
