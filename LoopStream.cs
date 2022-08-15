@@ -18,8 +18,7 @@ namespace GuessMelody
         private WaveStream? _sourceStream;
         private static bool cbLoop;
         private static int countm;
-        private static int i;
-        private static int lmusicNumber;
+        private static int i;        
         private readonly static Random lrnd = new();
         private readonly FormPopup _formPopup = new();
         private readonly FGame _fGame = new();
@@ -147,7 +146,7 @@ namespace GuessMelody
         public override int Read(byte[] buffer, int offset, int count)
         {
             int totalBytesRead = 0;
-            
+            int lmusicNumber;
 
             while (totalBytesRead < count && _sourceStream != null)
             {                
@@ -162,8 +161,8 @@ namespace GuessMelody
                             break;
                         }
                         // loop                        
-                        i++;
-                        if (countm > Quiz.Get_list().Count - 1)
+                        SetI(i + 1);
+                        if (Get_countm() > Quiz.Get_list().Count - 1)
                         {
                             if (Quiz.Get_list().Count <= 0)
                             {
@@ -181,15 +180,15 @@ namespace GuessMelody
                             }
                             else
                             {
-                                countm = 0;
-                                _sourceStream = new AudioFileReader(Quiz.Get_list()[countm]);
-                                countm++;
+                                Set_countm(0);
+                                _sourceStream = new AudioFileReader(Quiz.Get_list()[Get_countm()]);
+                                Set_countm(countm++);
                                 _sourceStream.Position = 0;
                             }
                         }
                         else
                         {
-                            if (i == 1)
+                            if (GetI() == 1)
                             {
                                 if (FGame.Get_cbRnd() == true)
                                 {
@@ -214,16 +213,16 @@ namespace GuessMelody
                                 }
                                 else
                                 {
-                                    _sourceStream = new AudioFileReader(Quiz.Get_list()[countm + 1]);
+                                    _sourceStream = new AudioFileReader(Quiz.Get_list()[Get_countm() + 1]);
                                     try
                                     {
-                                        _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (Quiz.Get_list().Count - countm - 2).ToString());
+                                        _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (Quiz.Get_list().Count - Get_countm() - 2).ToString());
                                     }
                                     catch
                                     {
-                                        _fGame.lblNumberOfMelody.Text = (Quiz.Get_list().Count - countm - 2).ToString();
+                                        _fGame.lblNumberOfMelody.Text = (Quiz.Get_list().Count - Get_countm() - 2).ToString();
                                     }
-                                    countm += 2;
+                                    Set_countm(countm + 2);
                                     _sourceStream.Position = 0;
                                 }
                             }
@@ -247,9 +246,9 @@ namespace GuessMelody
                                 }
                                 else
                                 {
-                                    _sourceStream = new AudioFileReader(Quiz.Get_list()[countm]);
-                                    _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (Quiz.Get_list().Count - countm - 1).ToString());
-                                    countm++;
+                                    _sourceStream = new AudioFileReader(Quiz.Get_list()[Get_countm()]);
+                                    _fGame.lblNumberOfMelody.Invoke(() => _fGame.lblNumberOfMelody.Text = (Quiz.Get_list().Count - Get_countm() - 1).ToString());
+                                    Set_countm(countm + 1);
                                     _sourceStream.Position = 0;
                                 }
 

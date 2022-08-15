@@ -24,6 +24,10 @@ namespace GuessMelody
         {
             return isCancel;
         }
+        public static void Set_isCancel(bool isCancel_public)
+        {
+            isCancel = isCancel_public;
+        }
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
@@ -42,13 +46,13 @@ namespace GuessMelody
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            isCancel = true;
+            Set_isCancel(true);
             this.Close();
         }
 
         private void FormPopup_Load(object sender, EventArgs e)
         {
-            isCancel = false;
+            Set_isCancel(false);
             Connection.CancelAudioConn();
             FGame _fGame = new();
             _fGame.timer1.Stop();
