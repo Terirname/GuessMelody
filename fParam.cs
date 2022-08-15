@@ -41,7 +41,6 @@ namespace GuessMelody
             SetParam();
             this.Hide();
         }
-
         private void BtnSelectFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new();
