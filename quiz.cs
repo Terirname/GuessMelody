@@ -17,76 +17,27 @@ namespace GuessMelody
 
         }
 
-        private readonly static List<string> list = new();
-        private static int gameDuration = 60;
-        private static int musicDuration = 10;
-        private static bool startRndTrack;
-        private static string lastFolder = "";
-        private static bool allDirectories;
-        private const string LastFolder = "LastFolder";
-        private const string StartRandomTrack = "StartRandomTrack";
-        private const string RandomPart = "RandomPart";
-        private const string GameDuration = "GameDuration";
-        private const string MusicDuration = "MusicDuration";
-        private const string AllDirectories = "AllDirectories";
-        private const string Looped = "Looped";
-
-        public static void Set_gameDuration(int gameDuration_public)
-        {
-            gameDuration = gameDuration_public;
-        }
-
-        public static int Get_gameDuration()
-        {
-            return gameDuration;
-        }
-
-        public static List<string> Get_list()
-        {
-            return list;
-        }
-
-        public static void Set_musicDuration(int musicDuration_public)
-        {
-            musicDuration = musicDuration_public;
-        }
-
-        public static int Get_musicDuration()
-        {
-            return musicDuration;
-        }
-        public static void Set_startRndTrack(bool startRndTrack_public)
-        {
-            startRndTrack = startRndTrack_public;
-        }
-
-        public static bool Get_startRndTrack()
-        {
-            return startRndTrack;
-        }
-        public static string Get_lastFolder()
-        {
-            return lastFolder;
-        }
-        public static void Set_lastFolder(string lastFolder_public)
-        {
-            lastFolder = lastFolder_public;
-        }
-        public static bool Get_allDirectories()
-        {
-            return allDirectories;
-        }
-        public static void Set_allDirectories(bool allDirectories_public)
-        {
-            allDirectories = allDirectories_public;
-        }
+        public static List<string> List { get; } = new();
+        public static int GameDuration { get; set; } = 60;
+        public static int MusicDuration { get; set; } = 10;
+        public static bool StartRndTrack { get; set; }
+        public static string LastFolder { get; set; }  = "";
+        public static bool AllDirectories { get; set; }
+        private const string LastFolderRg = "LastFolder";
+        private const string StartRandomTrackRg = "StartRandomTrack";
+        private const string RandomPartRg = "RandomPart";
+        private const string GameDurationRg = "GameDuration";
+        private const string MusicDurationRg = "MusicDuration";
+        private const string AllDirectoriesRg = "AllDirectories";
+        private const string LoopedRg = "Looped";
+                                          
         public static void ReadMusic()
         {
             try 
             { 
-                string[] music_files = Directory.GetFiles(lastFolder, "*.mp3", allDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-                list.Clear();
-                list.AddRange(music_files);
+                string[] music_files = Directory.GetFiles(LastFolder, "*.mp3", AllDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                List.Clear();
+                List.AddRange(music_files);
             }
             catch 
             {
@@ -106,14 +57,14 @@ namespace GuessMelody
                 { 
                     return; 
                 }
-                rk.SetValue(LastFolder, lastFolder);
-                rk.SetValue(StartRandomTrack, startRndTrack);
-                rk.SetValue(GameDuration, gameDuration);
-                rk.SetValue(MusicDuration, musicDuration);
-                rk.SetValue(AllDirectories, allDirectories);
-                rk.SetValue(Looped, LoopStream.Get_cbLoop());
-                rk.SetValue(StartRandomTrack, FGame.Get_cbRnd());
-                rk.SetValue(RandomPart, Connection.Get_rndPart());
+                rk.SetValue(LastFolderRg, LastFolder);
+                rk.SetValue(StartRandomTrackRg, StartRndTrack);
+                rk.SetValue(GameDurationRg, GameDuration);
+                rk.SetValue(MusicDurationRg, MusicDuration);
+                rk.SetValue(AllDirectoriesRg, AllDirectories);
+                rk.SetValue(LoopedRg, LoopStream.CbLoop);
+                rk.SetValue(StartRandomTrackRg, FGame.CbRnd);
+                rk.SetValue(RandomPartRg, Connection.RndPart);
             }
             finally
             {
@@ -132,14 +83,14 @@ namespace GuessMelody
                 rk = Registry.CurrentUser.OpenSubKey(regKeyName);
                 if (rk != null)
                 {
-                    lastFolder = (string)rk.GetValue(LastFolder)!;
-                    gameDuration = (int)rk.GetValue(GameDuration)!;
-                    startRndTrack = Convert.ToBoolean(rk.GetValue(StartRandomTrack, false));
-                    musicDuration = (int)rk.GetValue(MusicDuration)!;
-                    allDirectories = Convert.ToBoolean(rk.GetValue(AllDirectories, false));
-                    LoopStream.Set_cbLoop(Convert.ToBoolean(rk.GetValue(Looped, false)));
-                    FGame.Set_cbRnd(Convert.ToBoolean(rk.GetValue(StartRandomTrack, false)));
-                    Connection.Set_rndPart(Convert.ToBoolean(rk.GetValue(RandomPart, false)));
+                    LastFolder = (string)rk.GetValue(LastFolderRg)!;
+                    GameDuration = (int)rk.GetValue(GameDurationRg)!;
+                    StartRndTrack = Convert.ToBoolean(rk.GetValue(StartRandomTrackRg, false));
+                    MusicDuration = (int)rk.GetValue(MusicDurationRg)!;
+                    AllDirectories = Convert.ToBoolean(rk.GetValue(AllDirectoriesRg, false));
+                    LoopStream.CbLoop = Convert.ToBoolean(rk.GetValue(LoopedRg, false));
+                    FGame.CbRnd = Convert.ToBoolean(rk.GetValue(StartRandomTrackRg, false));
+                    Connection.RndPart = Convert.ToBoolean(rk.GetValue(RandomPartRg, false));
                 }
                 
             }

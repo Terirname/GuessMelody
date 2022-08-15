@@ -18,47 +18,12 @@ namespace GuessMelody
     public partial class FGame : Form
     {
         public static readonly Random rnd = new();
-        private static int musicNumber;
-        private static int cnt;
-        private static bool cbRnd;
-        private static int success;
-        int musicDuration = Quiz.Get_musicDuration();
-
-        public static void Set_cnt(int cnt_public)
-        {
-            cnt = cnt_public;
-        }
-
-        public static int Get_cnt()
-        {
-            return cnt;
-        }
-        public static void Set_cbRnd(bool cbRnd_public)
-        {
-            cbRnd = cbRnd_public;
-        }
-
-        public static bool Get_cbRnd()
-        {
-            return cbRnd;
-        }
-        public static void Set_success(int success_public)
-        {
-            success = success_public;
-        }
-
-        public static int Get_success()
-        {
-            return success;
-        }
-        public static int Get_musicNumber()
-        {
-            return musicNumber;
-        }
-        public static void Set_musicNumber(int musicNumber_public)
-        {
-            musicNumber = musicNumber_public;
-        }
+        public static int MusicNumber { get; set; }
+        public static int Cnt { get; set; }
+        public static bool CbRnd { get; set; }
+        public static int Success { get; set; }
+        private int musicDuration = Quiz.MusicDuration;
+                             
         public void ProgressBarToZero()
         {
             try
@@ -88,11 +53,11 @@ namespace GuessMelody
         {
             Connection.CancelAudioConn();
             ResetTheScore();
-            lblNumberOfMelody.Text = Quiz.Get_list().Count.ToString();
+            lblNumberOfMelody.Text = Quiz.List.Count.ToString();
             progressBar1.Value = 0;
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = Quiz.Get_gameDuration();
-            musicDuration = Quiz.Get_musicDuration();
+            progressBar1.Maximum = Quiz.GameDuration;
+            musicDuration = Quiz.MusicDuration;
             lblMusicDuration.Text = musicDuration.ToString();
         }
 
@@ -100,9 +65,9 @@ namespace GuessMelody
         {
             ProgressBarToZero();
             Connection.CancelAudioConn();
-            LoopStream.Set_countm(0);
-            LoopStream.SetI(0);
-            Set_cnt(0);
+            LoopStream.Countm = 0;
+            LoopStream.I = 0;
+            Cnt = 0;
             Quiz.ReadParam();
             Quiz.ReadMusic();
             timer1.Stop();
@@ -134,7 +99,7 @@ namespace GuessMelody
 
         public void PlayThePlaylist()
         {
-            if ((Get_cnt() > Quiz.Get_list().Count - 1) || (cbRnd && Quiz.Get_list().Count == 0)) // stop playing and show popup menu
+            if ((Cnt > Quiz.List.Count - 1) || (CbRnd && Quiz.List.Count == 0)) // stop playing and show popup menu
             {
                 ProgressBarToZero();
                 Connection.CancelAudioConn();
@@ -142,7 +107,7 @@ namespace GuessMelody
                 timer1.Stop();
                 FormPopup _formPopup = new();
                 _formPopup.ShowDialog();
-                if (Get_cnt() == 0 && !FormPopup.Get_isCancel())
+                if (Cnt == 0 && !FormPopup.IsCancel)
                 {
                     ResetTheScore();
                 }
@@ -150,18 +115,18 @@ namespace GuessMelody
             }
             else // play music and increase counter of tracks count
             {
-                if (cbRnd)
+                if (CbRnd)
                 {
-                    Set_musicNumber(rnd.Next(0, Quiz.Get_list().Count));
+                    MusicNumber = rnd.Next(0, Quiz.List.Count);
                     Connection.CreateAudioConn();
-                    Quiz.Get_list().RemoveAt(Get_musicNumber());
-                    lblNumberOfMelody.Text = Quiz.Get_list().Count.ToString();
+                    Quiz.List.RemoveAt(MusicNumber);
+                    lblNumberOfMelody.Text = Quiz.List.Count.ToString();
                 }
                 else
                 {
                     Connection.CreateAudioConn();
-                    lblNumberOfMelody.Text = (Quiz.Get_list().Count - Get_cnt()).ToString();
-                    Set_cnt(cnt + 1);
+                    lblNumberOfMelody.Text = (Quiz.List.Count - Cnt).ToString();
+                    Cnt++;
                 }
 
             }
@@ -190,13 +155,13 @@ namespace GuessMelody
             {
                 timer1.Stop();
                 progressBar1.Value = 0;
-                if ((Get_cnt() > Quiz.Get_list().Count - 1) || (cbRnd && Quiz.Get_list().Count == 0)) // stop playing and show popup menu
+                if ((Cnt > Quiz.List.Count - 1) || (CbRnd && Quiz.List.Count == 0)) // stop playing and show popup menu
                 {
                     Connection.CancelAudioConn();
                     lblNumberOfMelody.Text = 0.ToString();
                     timer1.Stop();
                     _formPopup.ShowDialog();
-                    if (Get_cnt() == 0 && !FormPopup.Get_isCancel())
+                    if (Cnt == 0 && !FormPopup.IsCancel)
                     {
                         ResetTheScore();
                     }
@@ -230,21 +195,21 @@ namespace GuessMelody
 
         void GamePause()
         {
-            if (Connection.Get_waveOutDevice() != null && Connection.Get_waveOutDevice()!.PlaybackState == PlaybackState.Playing)
+            if (Connection.WaveOutDevice != null && Connection.WaveOutDevice.PlaybackState == PlaybackState.Playing)
             {
-                Connection.Get_waveOutDevice()!.Pause();
+                Connection.WaveOutDevice.Pause();
                 timer1.Stop();
             }
-            else if (Connection.Get_waveOutDevice() == null)
+            else if (Connection.WaveOutDevice == null)
             {
                 ShowMsgBoxForPause();
             }
-            else if (Connection.Get_waveOutDevice() != null && Connection.Get_waveOutDevice()!.PlaybackState == PlaybackState.Paused)
+            else if (Connection.WaveOutDevice != null && Connection.WaveOutDevice.PlaybackState == PlaybackState.Paused)
             {
                 string text = "Music is already paused";
                 MessageBox.Show(text);
             }
-            else if (Connection.Get_waveOutDevice() != null && Connection.Get_waveOutDevice()!.PlaybackState == PlaybackState.Stopped)
+            else if (Connection.WaveOutDevice != null && Connection.WaveOutDevice.PlaybackState == PlaybackState.Stopped)
             {
                 ShowMsgBoxForPause();
             }
@@ -253,21 +218,21 @@ namespace GuessMelody
 
         void GameContinue()
         {
-            if (Connection.Get_waveOutDevice() != null && Connection.Get_waveOutDevice()!.PlaybackState == PlaybackState.Paused)
+            if (Connection.WaveOutDevice != null && Connection.WaveOutDevice.PlaybackState == PlaybackState.Paused)
             {
-                Connection.Get_waveOutDevice()!.Play();
+                Connection.WaveOutDevice.Play();
                 timer1.Start();
             }
-            else if (Connection.Get_waveOutDevice() == null)
+            else if (Connection.WaveOutDevice == null)
             {
                 ShowMsgBoxForContinue();
             }
-            else if (Connection.Get_waveOutDevice() != null && Connection.Get_waveOutDevice()!.PlaybackState == PlaybackState.Playing)
+            else if (Connection.WaveOutDevice != null && Connection.WaveOutDevice.PlaybackState == PlaybackState.Playing)
             {
                 string text = "Music is already playing";
                 MessageBox.Show(text);
             }
-            else if (Connection.Get_waveOutDevice() != null && Connection.Get_waveOutDevice()!.PlaybackState == PlaybackState.Stopped)
+            else if (Connection.WaveOutDevice != null && Connection.WaveOutDevice.PlaybackState == PlaybackState.Stopped)
             {
                 ShowMsgBoxForContinue();
             }
@@ -275,14 +240,14 @@ namespace GuessMelody
 
         void NextMelody()
         {
-            musicDuration = Quiz.Get_musicDuration();
+            musicDuration = Quiz.MusicDuration;
             lblMusicDuration.Text = musicDuration.ToString();
             ProgressBarToZero();
             timer1.Start();
-            Set_success(Int32.Parse(lblNumberOfMelody.Text));
-            if (Get_success() >= 1)
+            Success = Int32.Parse(lblNumberOfMelody.Text);
+            if (Success >= 1)
             {
-                lblNumberOfMelody.Text = (Get_success() - 1).ToString();
+                lblNumberOfMelody.Text = (Success - 1).ToString();
             }
             PlayThePlaylist();
         }
@@ -307,9 +272,9 @@ namespace GuessMelody
                 message.lblMessage.Text = player;
             }
 
-            if (Connection.Get_waveOutDevice() != null)
+            if (Connection.WaveOutDevice != null)
             {
-                Connection.Get_waveOutDevice()!.Pause();
+                Connection.WaveOutDevice.Pause();
                 timer1.Stop();
             }
             else
@@ -333,9 +298,9 @@ namespace GuessMelody
             }
             else
             {
-                if (Connection.Get_waveOutDevice() != null)
+                if (Connection.WaveOutDevice != null)
                 {
-                    Connection.Get_waveOutDevice()!.Play();
+                    Connection.WaveOutDevice.Play();
                     timer1.Start();
                 }
                 else
