@@ -19,7 +19,6 @@ namespace GuessMelody
         {
             InitializeComponent();
         }
-
         private void BtnOK_Click(object sender, EventArgs e)
         {
             Quiz.Set_allDirectories(cbAllFolders.Checked);
