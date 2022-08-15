@@ -36,7 +36,6 @@ namespace GuessMelody
             Quiz.ReadMusic();
             this.Hide();
         }
-
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             SetParam();
