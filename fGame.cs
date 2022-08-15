@@ -142,7 +142,7 @@ namespace GuessMelody
                 timer1.Stop();
                 FormPopup _formPopup = new();
                 _formPopup.ShowDialog();
-                if (Get_cnt() == 0 && FormPopup.Get_isCancel() == false)
+                if (Get_cnt() == 0 && !FormPopup.Get_isCancel())
                 {
                     ResetTheScore();
                 }
@@ -196,7 +196,7 @@ namespace GuessMelody
                     lblNumberOfMelody.Text = 0.ToString();
                     timer1.Stop();
                     _formPopup.ShowDialog();
-                    if (Get_cnt() == 0 && FormPopup.Get_isCancel() == false)
+                    if (Get_cnt() == 0 && !FormPopup.Get_isCancel())
                     {
                         ResetTheScore();
                     }
