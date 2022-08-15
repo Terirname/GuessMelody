@@ -153,7 +153,7 @@ namespace GuessMelody
                 int bytesRead = _sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
                 if (bytesRead == 0)
                 {
-                    if (cbLoop == true)
+                    if (cbLoop)
                     {
                         if (_sourceStream.Position == 0 || !EnableLooping)
                         {
@@ -171,7 +171,7 @@ namespace GuessMelody
                                 _formPopup.ShowDialog();
                                 break;
                             }
-                            if (FGame.Get_cbRnd() == false)
+                            if (!FGame.Get_cbRnd())
                             {
                                 Quiz.Get_list().Clear();
                                 Connection.CancelAudioConn();
@@ -190,7 +190,7 @@ namespace GuessMelody
                         {
                             if (GetI() == 1)
                             {
-                                if (FGame.Get_cbRnd() == true)
+                                if (FGame.Get_cbRnd())
                                 {
                                     if (Quiz.Get_list().Count <= 0)
                                     {
@@ -228,7 +228,7 @@ namespace GuessMelody
                             }
                             else
                             {
-                                if (FGame.Get_cbRnd() == true)
+                                if (FGame.Get_cbRnd())
                                 {
                                     if (Quiz.Get_list().Count <= 0)
                                     {
